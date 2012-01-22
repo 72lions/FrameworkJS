@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript" src="../src/frameworkjs.js"></script>
+    <script>
+
+        var arr = [1,2,3,4];
+        var number = 1;
+        var object = {a: 1};
+        var  grid, gridView;
+
+        //Create a new Controller.Grid controller
+        var GridController =  FRAMEWORKJS.extend(function() {
+            // Overwritting the properties
+            this.name = 'GridController';
+
+        }, FRAMEWORKJS.Controller, 'Controller.Grid');
+
+        // Create a View.Grid view
+        var GridView = FRAMEWORKJS.extend(function () {
+
+            // Overwritting the properties
+            this.name = 'GridView';
+            this.domElement = '.test';
+
+            /**
+             * Overwrite the draw function
+             */
+            this.draw = function () {
+                //console.log('Overwritting the draw function...');
+            };
+
+        }, FRAMEWORKJS.View, 'View.Grid');
+
+        var gridView1 = FRAMEWORKJS.retrieve('GRIDVIEW1', 'View.Grid', FRAMEWORKJS.VIEW);
+
+        var gridController1 = FRAMEWORKJS.retrieve('GridCtl1', 'Controller.Grid', FRAMEWORKJS.CONTROLLER);
+        gridController1.name = 'the name';
+        gridController1.setView(gridView1);
+
+
+    </script>
+</body>
+</html>
