@@ -231,13 +231,14 @@ FRAMEWORKJS.EventTarget = function () {
      * @author Mr.Doob
      */
     this.addEventListener = function ( type, listener, ctx ) {
+        var obj = {callback: listener, context: ctx};
 
         if ( listeners[ type ] === undefined ) {
             listeners[ type ] = [];
         }
 
-        if ( listeners[ type ].indexOf( listener ) === - 1 ) {
-            listeners[ type ].push( listener );
+        if ( listeners[ type ].indexOf(ctx) === - 1 ) {
+            listeners[ type ].push(ctx);
         }
 
     };
@@ -250,7 +251,7 @@ FRAMEWORKJS.EventTarget = function () {
      */
     this.dispatchEvent = function ( event ) {
         for ( var listener in listeners[ event.type ] ) {
-            listeners[ event.type ][ listener ]( event );
+            listener.callback.call( listener.context, event );
         }
 
     };
@@ -260,11 +261,12 @@ FRAMEWORKJS.EventTarget = function () {
      *
      * @param {String} type The event type
      * @param {Function} listener The callback function
+     * @param {Object} ctx The context that will be used for the calling the callback
      * @author Mr.Doob
      */
-    this.removeEventListener = function ( type, listener ) {
-
-        var index = listeners[ type ].indexOf( listener );
+    this.removeEventListener = function ( type, listener, ctx) {
+        var obj = {callback: listener, context: ctx};
+        var index = listeners[ type ].indexOf( obj );
 
         if ( index !== - 1 ) {
             listeners[ type ].splice( index, 1 );
@@ -451,16 +453,14 @@ FRAMEWORKJS.View = function() {
      *
      * @author Thodoris Tsiridis
      */
-    this.show = function() {
-    };
+    this.show = function() {};
 
     /**
      * Function for when hiding the view
      *
      * @author Thodoris Tsiridis
      */
-    this.hide = function() {
-    };
+    this.hide = function() {};
 
     /**
      * Sets the name of the view
