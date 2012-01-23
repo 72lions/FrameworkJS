@@ -2,11 +2,16 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Testing FRAMEWORKJS</title>
 </head>
 <body>
     <script type="text/javascript" src="../src/frameworkjs.js"></script>
-    <script>
+    <script type="text/javascript" src="../src/utils.js"></script>
+    <script type="text/javascript" src="../src/eventtarget.js"></script>
+    <script type="text/javascript" src="../src/controller.js"></script>
+    <script type="text/javascript" src="../src/view.js"></script>
+    <script type="text/javascript" src="../src/model.js"></script>
+    <script type="text/javascript">
 
         var arr = [1,2,3,4];
         var number = 1;
@@ -19,6 +24,18 @@
             this.name = 'GridController';
 
         }, FRAMEWORKJS.Controller, 'Controller.Grid');
+
+
+
+        //Create a new Controller.Grid controller
+        var GridModel =  FRAMEWORKJS.extend(function() {
+            // Overwritting the properties
+            this.name = 'GridModel';
+            this.data = {title: "MyTitle"};
+
+        }, FRAMEWORKJS.Model, 'Model.Grid');
+
+
 
         // Create a View.Grid view
         var GridView = FRAMEWORKJS.extend(function () {
@@ -36,12 +53,15 @@
 
         }, FRAMEWORKJS.View, 'View.Grid');
 
-        var gridView1 = FRAMEWORKJS.retrieve('GRIDVIEW1', 'View.Grid', FRAMEWORKJS.VIEW);
 
-        var gridController1 = FRAMEWORKJS.retrieve('GridCtl1', 'Controller.Grid', FRAMEWORKJS.CONTROLLER);
+        // Creating the controllers
+        var gridView1 = FRAMEWORKJS.retrieve('GRIDVIEW1', 'View.Grid', FRAMEWORKJS.VIEW);
+        var gridModel1 = FRAMEWORKJS.retrieve('GRIDMODEL1', 'Model.Grid', FRAMEWORKJS.MODEL);
+        var gridController1 = FRAMEWORKJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FRAMEWORKJS.CONTROLLER);
+
         gridController1.name = 'the name';
         gridController1.setView(gridView1);
-
+        gridController1.setModel(gridModel1);
 
     </script>
 </body>
