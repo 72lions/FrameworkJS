@@ -58,6 +58,8 @@ FRAMEWORKJS.Controller = function() {
         if (typeof attributes !== 'undefined') {
             this.id = attributes.id || '';
         }
+
+        this.postInitialize();
     };
 
     /**
@@ -66,7 +68,7 @@ FRAMEWORKJS.Controller = function() {
      * @param {Object} options The options that will be used to initialize the controller
      * @author Thodoris Tsiridis
      */
-    this.postInitialize = function(options) {};
+    this.postInitialize = function() {};
 
     /**
      * Sets the view of the controller
@@ -76,6 +78,7 @@ FRAMEWORKJS.Controller = function() {
      */
     this.setView = function(view) {
         this._view = view;
+        this._view.setController(this);
     };
 
     /**

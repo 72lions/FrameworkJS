@@ -102,7 +102,7 @@ var FRAMEWORKJS = {
                 }
 
                 FRAMEWORKJS._controllers[id].push(controllerObj);
-                controllerObj.classType.initialize({id: id});
+                controllerObj.classType.id = id;
                 return controllerObj.classType;
 
             } else {
@@ -143,7 +143,7 @@ var FRAMEWORKJS = {
                 }
 
                 FRAMEWORKJS._views[className].push(viewObj);
-                viewObj.classType.preInitialize({id: id});
+                viewObj.classType.id = id;
                 return viewObj.classType;
 
             } else {
@@ -183,8 +183,7 @@ var FRAMEWORKJS = {
                 }
 
                 FRAMEWORKJS._models[className].push(modelObj);
-                modelObj.classType.setId(id);
-
+                modelObj.classType.id = id;
                 return modelObj.classType;
 
             } else {

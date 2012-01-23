@@ -43,14 +43,6 @@ FRAMEWORKJS.View = function() {
     this._controller = undefined;
 
     /**
-     * A reference to this view's model
-     *
-     * @type FRAMEWORKJS.View
-     * @default undefined
-     */
-    this._model = undefined;
-
-    /**
      * The DOM Element
      *
      * @type Object
@@ -138,41 +130,16 @@ FRAMEWORKJS.View = function() {
     };
 
     /**
-     * Is triggered before initialization of the view
+     * Initializes the view
      *
      * @param {Object} attributes The attributes that will be used to initialize the class
      * @param {String} attributes.id The unique id for this class
      * @author Thodoris Tsiridis
      */
-    this.preInitialize = function(attributes) {
+    this.initialize = function(attributes) {
         if (typeof attributes !== 'undefined') {
             this.setId(attributes.id);
         }
-
-        this.initialize();
-        this.draw();
-        this.postDraw();
     };
-
-    /**
-     * Initializes the view
-     *
-     * @author Thodoris Tsiridis
-     */
-    this.initialize = function(){};
-
-    /**
-     * Draws the view
-     *
-     * @author Thodoris Tsiridis
-     */
-    this.draw = function(){};
-
-    /**
-     * Executed after the drawing of the view
-     *
-     * @author Thodoris Tsiridis
-     */
-    this.postDraw = function(){};
 
 };

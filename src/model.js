@@ -34,46 +34,6 @@ FRAMEWORKJS.Model = function(){
     this.id = '';
 
     /**
-     * Sets the model data
-     *
-     * @param {Object} data The model data
-     * @author Thodoris Tsiridis
-     */
-    this.setData = function(data) {
-        this.data = data;
-    };
-
-    /**
-     * Gets the model data
-     *
-     * @return {Object} The data
-     * @author Thodoris Tsiridis
-     */
-    this.getData = function() {
-        return this.data;
-    };
-
-    /**
-     * Sets the name of the model
-     *
-     * @param {String} name The name/type of the model
-     * @author Thodoris Tsiridis
-     */
-    this.setName = function(name) {
-        this.name = name;
-    };
-
-    /**
-     * Sets the id of the model
-     *
-     * @param {String} id The id of the model
-     * @author Thodoris Tsiridis
-     */
-    this.setId = function (id) {
-        this.id = id;
-    };
-
-    /**
      * Saves a value to a specific key of the model
      *
      * @param {String} key The key of the data object to be set

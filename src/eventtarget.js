@@ -30,8 +30,8 @@ FRAMEWORKJS.EventTarget = function () {
             listeners[ type ] = [];
         }
 
-        if ( listeners[ type ].indexOf(ctx) === - 1 ) {
-            listeners[ type ].push(ctx);
+        if ( listeners[ type ].indexOf(obj) === - 1 ) {
+            listeners[ type ].push(obj);
         }
 
     };
@@ -43,8 +43,9 @@ FRAMEWORKJS.EventTarget = function () {
      * @author Mr.Doob
      */
     this.dispatchEvent = function ( event ) {
-        for ( var listener in listeners[ event.type ] ) {
-            listener.callback.call( listener.context, event );
+        var events = listeners[ event.type ];
+        for ( var i = 0; i < events.length; i++ ) {
+            events[i].callback.call( events[i].context, event );
         }
 
     };
@@ -58,8 +59,15 @@ FRAMEWORKJS.EventTarget = function () {
      * @author Mr.Doob
      */
     this.removeEventListener = function ( type, listener, ctx) {
-        var obj = {callback: listener, context: ctx};
-        var index = listeners[ type ].indexOf( obj );
+
+        var events = listeners[type];
+
+        for (var i = 0; i < events.length; i++) {
+            if (events[i].callback === listener && events[i].context === ctx) {
+               index = i;
+               break;
+            }
+        }
 
         if ( index !== - 1 ) {
             listeners[ type ].splice( index, 1 );

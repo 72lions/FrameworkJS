@@ -54,10 +54,19 @@
         }, FRAMEWORKJS.View, 'View.Grid');
 
 
+        var onTest = function(event){
+            console.log('onTest', event);
+        };
+
         // Creating the controllers
         var gridView1 = FRAMEWORKJS.retrieve('GRIDVIEW1', 'View.Grid', FRAMEWORKJS.VIEW);
+        gridView1.addEventListener('onTest', onTest, this);
         var gridModel1 = FRAMEWORKJS.retrieve('GRIDMODEL1', 'Model.Grid', FRAMEWORKJS.MODEL);
         var gridController1 = FRAMEWORKJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FRAMEWORKJS.CONTROLLER);
+
+        gridView1.dispatchEvent({type:'onTest'});
+        gridView1.removeEventListener('onTest', onTest, this);
+        gridView1.dispatchEvent({type:'onTest'});
 
         gridController1.name = 'the name';
         gridController1.setView(gridView1);
