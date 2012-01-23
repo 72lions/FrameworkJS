@@ -3,13 +3,13 @@
  *
  * @module 72lions
  * @class Controller
- * @namespace FRAMEWORKJS
+ * @namespace FrameworkJS
  * @author Thodoris Tsiridis
  * @version 1.0
  */
-FRAMEWORKJS.Controller = function() {
+FrameworkJS.Controller = function() {
 
-    FRAMEWORKJS.EventTarget.call(this);
+    FrameworkJS.EventTarget.call(this);
 
     /**
      * A reference to this controller's view

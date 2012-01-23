@@ -3,10 +3,12 @@
  *
  * @module 72lions
  * @class EventTarget
+ * @namespace FrameworkJS
  * @author Mr.Doob
- * @version 1.0
+ * @author Thodoris Tsiridis
+ * @version 1.1
  */
-FRAMEWORKJS.EventTarget = function () {
+FrameworkJS.EventTarget = function () {
     /**
      * The object that will hold all the event listeners
      *
@@ -22,6 +24,7 @@ FRAMEWORKJS.EventTarget = function () {
      * @param {Function} listener The callback function
      * @param {Object} ctx The context that will be used for the calling the callback
      * @author Mr.Doob
+     * @author Thodoris Tsiridis
      */
     this.addEventListener = function ( type, listener, ctx ) {
         var obj = {callback: listener, context: ctx};
@@ -41,6 +44,7 @@ FRAMEWORKJS.EventTarget = function () {
      *
      * @param {String} type The event type
      * @author Mr.Doob
+     * @author Thodoris Tsiridis
      */
     this.dispatchEvent = function ( event ) {
         var events = listeners[ event.type ];
@@ -57,6 +61,7 @@ FRAMEWORKJS.EventTarget = function () {
      * @param {Function} listener The callback function
      * @param {Object} ctx The context that will be used for the calling the callback
      * @author Mr.Doob
+     * @author Thodoris Tsiridis
      */
     this.removeEventListener = function ( type, listener, ctx) {
 

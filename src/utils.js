@@ -1,8 +1,14 @@
 /**
- * The Utils object holds some utility functions
+ * The Utils class holds utilities functions
+ *
+ * @module 72lions
+ * @class EventTarget
+ * @namespace FrameworkJS
+ * @author Mr.Doob
  * @author Thodoris Tsiridis
+ * @version 1.1
  */
-FRAMEWORKJS.Utils = {
+FrameworkJS.Utils = {
 
     /**
      * Checks if an object is an array

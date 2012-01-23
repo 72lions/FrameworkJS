@@ -3,13 +3,13 @@
  *
  * @module 72lions
  * @class View
- * @namespace FRAMEWORKJS
+ * @namespace FrameworkJS
  * @author Thodoris Tsiridis
  * @version 1.0
  */
-FRAMEWORKJS.View = function() {
+FrameworkJS.View = function() {
 
-    FRAMEWORKJS.EventTarget.call(this);
+    FrameworkJS.EventTarget.call(this);
 
     /**
      * The view name

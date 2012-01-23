@@ -3,11 +3,11 @@
  *
  * @module 72lions
  * @class Model
- * @namespace FRAMEWORKJS
+ * @namespace FrameworkJS
  * @author Thodoris Tsiridis
  * @version 1.0
  */
-FRAMEWORKJS.Model = function(){
+FrameworkJS.Model = function(){
 
     /**
      * The object that holds the data

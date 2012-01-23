@@ -1,77 +1,94 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>Testing FRAMEWORKJS</title>
-</head>
-<body>
-    <script type="text/javascript" src="../src/frameworkjs.js"></script>
-    <script type="text/javascript" src="../src/utils.js"></script>
-    <script type="text/javascript" src="../src/eventtarget.js"></script>
-    <script type="text/javascript" src="../src/controller.js"></script>
-    <script type="text/javascript" src="../src/view.js"></script>
-    <script type="text/javascript" src="../src/model.js"></script>
-    <script type="text/javascript">
+    <head>
+        <meta charset="UTF-8">
+        <title>Testing FrameworkJS</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="../src/frameworkjs.js"></script>
+        <script type="text/javascript" src="../src/utils.js"></script>
+        <script type="text/javascript" src="../src/eventtarget.js"></script>
+        <script type="text/javascript" src="../src/controller.js"></script>
+        <script type="text/javascript" src="../src/view.js"></script>
+        <script type="text/javascript" src="../src/model.js"></script>
+        <script type="text/javascript">
 
-        var arr = [1,2,3,4];
-        var number = 1;
-        var object = {a: 1};
-        var  grid, gridView;
+            var arr = [1,2,3,4];
+            var number = 1;
+            var object = {a: 1};
+            var  grid, gridView;
 
-        //Create a new Controller.Grid controller
-        var GridController =  FRAMEWORKJS.extend(function() {
-            // Overwritting the properties
-            this.name = 'GridController';
+            //Create a new Controller.Grid controller
+            var GridController =  FrameworkJS.extend(function() {
+                // Overwritting the properties
+                this.name = 'GridController';
 
-        }, FRAMEWORKJS.Controller, 'Controller.Grid');
+            }, FrameworkJS.Controller, 'Controller.Grid');
 
+            //Create a new Controller.Grid controller
+            var GridModel =  FrameworkJS.extend(function() {
+                // Overwritting the properties
+                this.name = 'GridModel';
+                this.data = {title: "MyTitle"};
 
+            }, FrameworkJS.Model, 'Model.Grid');
 
-        //Create a new Controller.Grid controller
-        var GridModel =  FRAMEWORKJS.extend(function() {
-            // Overwritting the properties
-            this.name = 'GridModel';
-            this.data = {title: "MyTitle"};
+            // Create a View.Grid view
+            var GridView = FrameworkJS.extend(function () {
 
-        }, FRAMEWORKJS.Model, 'Model.Grid');
+                // Overwritting the properties
+                this.name = 'GridView';
+                this.domElement = '.test';
 
+                /**
+                 * Overwrite the draw function
+                 */
+                this.draw = function () {
+                    //console.log('Overwritting the draw function...');
+                };
 
-
-        // Create a View.Grid view
-        var GridView = FRAMEWORKJS.extend(function () {
-
-            // Overwritting the properties
-            this.name = 'GridView';
-            this.domElement = '.test';
+            }, FrameworkJS.View, 'View.Grid');
 
             /**
-             * Overwrite the draw function
+             * Triggered when the onTest event is dispatched
+             * @param  {Object} event The event
              */
-            this.draw = function () {
-                //console.log('Overwritting the draw function...');
+            var onTest = function(event){
+                console.log('onTest', event);
             };
 
-        }, FRAMEWORKJS.View, 'View.Grid');
+            /**
+             * Triggered when the onTest event is dispatched
+             * @param  {Object} event The event
+             */
+            var onTest2 = function(event){
+                console.log('onTest2', event);
+            };
 
+            // Creating the controllers
+            var gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid', FrameworkJS.VIEW);
+            var gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid', FrameworkJS.MODEL);
+            var gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FrameworkJS.CONTROLLER);
 
-        var onTest = function(event){
-            console.log('onTest', event);
-        };
+            // Adding the event listeners
+            gridView1.addEventListener('onTest', onTest, this);
+            gridView1.addEventListener('onTest', onTest2, this);
 
-        // Creating the controllers
-        var gridView1 = FRAMEWORKJS.retrieve('GRIDVIEW1', 'View.Grid', FRAMEWORKJS.VIEW);
-        gridView1.addEventListener('onTest', onTest, this);
-        var gridModel1 = FRAMEWORKJS.retrieve('GRIDMODEL1', 'Model.Grid', FRAMEWORKJS.MODEL);
-        var gridController1 = FRAMEWORKJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FRAMEWORKJS.CONTROLLER);
+            // Dispatching
+            gridView1.dispatchEvent({type:'onTest'});
 
-        gridView1.dispatchEvent({type:'onTest'});
-        gridView1.removeEventListener('onTest', onTest, this);
-        gridView1.dispatchEvent({type:'onTest'});
+            // Remove the event listeners
+            gridView1.removeEventListener('onTest', onTest, this);
+            gridView1.removeEventListener('onTest', onTest2, this);
 
-        gridController1.name = 'the name';
-        gridController1.setView(gridView1);
-        gridController1.setModel(gridModel1);
+            // Dispatching
+            gridView1.dispatchEvent({type:'onTest'});
 
-    </script>
-</body>
+            // Setup the controller
+            gridController1.name = 'GridController1';
+            gridController1.setView(gridView1);
+            gridController1.setModel(gridModel1);
+
+        </script>
+    </body>
 </html>
