@@ -9,6 +9,7 @@
         <script type="text/javascript" src="../src/frameworkjs.js"></script>
         <script type="text/javascript" src="../src/publisher.js"></script>
         <script type="text/javascript" src="../src/ajax.js"></script>
+        <script type="text/javascript" src="../src/service.js"></script>
         <script type="text/javascript" src="../src/utils.js"></script>
         <script type="text/javascript" src="../src/eventtarget.js"></script>
         <script type="text/javascript" src="../src/controller.js"></script>
@@ -20,9 +21,9 @@
             var number = 1;
             var object = {a: 1};
 
-            var  gridController1, gridView1, gridModel1;
+            var  gridController1, gridView1, gridModel1, gridService1;
             var onTest, onTest2;
-            var GridController, GridModel, GridView;
+            var GridController, GridModel, GridView, GridService;
 
             //Create a new Controller.Grid controller
             GridController =  FrameworkJS.extend(function() {
@@ -51,6 +52,14 @@
                 };
             }, FrameworkJS.View, 'View.Grid');
 
+            // Create a new Service.Grid service
+            GridService = FrameworkJS.extend(function() {
+                // Overwriting the onSuccess function
+                this.onSuccess = function(result) {
+                    console.log('Success dude!!!', result);
+                }
+            }, FrameworkJS.Service, 'Service.Grid');
+
             /**
              * Triggered when the onTest event is dispatched
              * @param  {Object} event The event
@@ -67,19 +76,17 @@
                 console.log('onTest2', event);
             };
 
-            // Creating the controllers
+            // Creating the controllers, views, models and services
             gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid', FrameworkJS.VIEW);
             gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid', FrameworkJS.MODEL);
             gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FrameworkJS.CONTROLLER);
+            gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid', FrameworkJS.SERVICE);
 
-            // Subscribing
+            // Subscribing example
             gridController1.subscribe('onApplicationReady');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
             gridController1.unsubscribe('onApplicationReady');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
-
-            // Dispatching
-            gridView1.dispatchEvent({type:'onTest'});
 
             // Setup the controller
             gridController1.name = 'GridController1';
@@ -97,18 +104,10 @@
             gridController1.getView().removeEventListener('onTest', onTest, this);
             gridController1.getView().removeEventListener('onTest', onTest2, this);
 
-            // Testing the ajax utility
-            FrameworkJS.Ajax({
-                method: 'GET',
-                dataType: 'json',
-                url: 'data.json',
-                success: function (result) {
-                    console.log(result);
-                },
-                error: function (error) {
-
-                }
-            });
+            // Call the service
+            gridService1.url = 'data.json';
+            gridService1.dataType = 'json';
+            gridService1.fetch();
 
         </script>
     </body>

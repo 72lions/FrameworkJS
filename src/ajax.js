@@ -126,7 +126,7 @@ FrameworkJS.Ajax = function(settings) {
      * Executes an ajax call
      * @author Thodoris Tsiridis
      */
-    var execute = function () {
+    this.execute = function () {
 
         var xmlhttp;
         var url  = _settings.url;
@@ -192,7 +192,6 @@ FrameworkJS.Ajax = function(settings) {
         }
     };
 
-    // Make the ajax call
-    execute();
+    return this;
 
 };

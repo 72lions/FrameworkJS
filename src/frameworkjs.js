@@ -25,6 +25,14 @@ var FrameworkJS = {
     _controllers: {},
 
     /**
+     * An object holding all the different services
+     *
+     * @private
+     * @type Object
+     */
+    _services: {},
+
+    /**
      * An object holding all the different class _types
      *
      * @private
@@ -37,7 +45,7 @@ var FrameworkJS = {
      * @param  {Function} what      The function that we want to extend
      * @param  {Function} withWhat  The class that we want to use for extending
      * @param  {String} classType The class type of the new extended function
-     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller}
+     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller || FrameworkJS.Service}
      */
     extend: function (what, withWhat, classType) {
 
@@ -156,7 +164,7 @@ var FrameworkJS = {
                 return FrameworkJS._views[className][exists].classType;
             }
 
-        } else if( type === FrameworkJS.MODEL) {
+        } else if (type === FrameworkJS.MODEL) {
 
             var exists = -1, modelObj, className;
 
@@ -196,6 +204,46 @@ var FrameworkJS = {
                 return FrameworkJS._models[className][exists].classType;
             }
 
+        } else if (type === FrameworkJS.SERVICE) {
+
+            var exists = -1, servObj, className;
+
+            className = classType || 'Generic.Service';
+            id = id || ('_id_' + Math.floor(Math.random()*10000).toString());
+
+            // Check if there is an array with objects of className type
+            // If not then create a new array
+            if(!FrameworkJS._services[className] || !FrameworkJS.Utils.isArray(FrameworkJS._services[className])) {
+                FrameworkJS._services[className] = [];
+            }
+
+            // Loop through al the items in the array
+            // to check if an item with this id already exists
+            for (var i = FrameworkJS._services[className].length - 1; i >= 0; i--) {
+                if(FrameworkJS._services[className][i].id == id){
+                    exists = i;
+                }
+            }
+
+            if(exists === -1){
+
+                exists = null;
+
+                // Check if the class that we want to load exists
+                if(FrameworkJS._types[className] !== undefined){
+                    servObj = {id: id, classType: new  FrameworkJS._types[className]()};
+                } else {
+                    servObj = {id: id, classType: new FrameworkJS.Model()};
+                }
+
+                FrameworkJS._services[className].push(servObj);
+                servObj.classType.id = id;
+                return servObj.classType;
+
+            } else {
+                return FrameworkJS._services[className][exists].classType;
+            }
+
         } else {
 
             console.log('FrameworkJS.retrieve: Not a valid class type', type);
@@ -229,6 +277,15 @@ var FrameworkJS = {
      * @property MODEL
      * @default 'model'
      */
-    MODEL: 'model'
+    MODEL: 'model',
+
+    /**
+     * A service constant
+     *
+     *@type String
+     * @property SERVICE
+     * @default 'service'
+     */
+    SERVICE: 'service'
 
 };
