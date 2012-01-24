@@ -20,8 +20,10 @@
 	<target name="merge-global-js">
 		<concat destfile="${dist.merged.file.js}" fixlastline="yes" append="no">
 			<filelist dir="${src.js.dir}" files="
+				json2.js
 				frameworkjs.js
 				publisher.js
+				ajax.js
 				utils.js
 				eventtarget.js
 				controller.js
