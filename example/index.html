@@ -17,26 +17,26 @@
             var arr = [1,2,3,4];
             var number = 1;
             var object = {a: 1};
-            var  grid, gridView;
+
+            var  gridController1, gridView1, gridModel1;
+            var onTest, onTest2;
+            var GridController, GridModel, GridView;
 
             //Create a new Controller.Grid controller
-            var GridController =  FrameworkJS.extend(function() {
+            GridController =  FrameworkJS.extend(function() {
                 // Overwritting the properties
                 this.name = 'GridController';
-
             }, FrameworkJS.Controller, 'Controller.Grid');
 
             //Create a new Controller.Grid controller
-            var GridModel =  FrameworkJS.extend(function() {
+            GridModel =  FrameworkJS.extend(function() {
                 // Overwritting the properties
                 this.name = 'GridModel';
                 this.data = {title: "MyTitle"};
-
             }, FrameworkJS.Model, 'Model.Grid');
 
             // Create a View.Grid view
-            var GridView = FrameworkJS.extend(function () {
-
+            GridView = FrameworkJS.extend(function () {
                 // Overwritting the properties
                 this.name = 'GridView';
                 this.domElement = '.test';
@@ -47,14 +47,13 @@
                 this.draw = function () {
                     //console.log('Overwritting the draw function...');
                 };
-
             }, FrameworkJS.View, 'View.Grid');
 
             /**
              * Triggered when the onTest event is dispatched
              * @param  {Object} event The event
              */
-            var onTest = function(event){
+            onTest = function(event){
                 console.log('onTest', event);
             };
 
@@ -62,15 +61,16 @@
              * Triggered when the onTest event is dispatched
              * @param  {Object} event The event
              */
-            var onTest2 = function(event){
+            onTest2 = function(event){
                 console.log('onTest2', event);
             };
 
             // Creating the controllers
-            var gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid', FrameworkJS.VIEW);
-            var gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid', FrameworkJS.MODEL);
-            var gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FrameworkJS.CONTROLLER);
+            gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid', FrameworkJS.VIEW);
+            gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid', FrameworkJS.MODEL);
+            gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FrameworkJS.CONTROLLER);
 
+            // Subscribing
             gridController1.subscribe('onApplicationReady');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
             gridController1.unsubscribe('onApplicationReady');
