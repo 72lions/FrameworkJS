@@ -24,6 +24,7 @@
 				frameworkjs.js
 				publisher.js
 				ajax.js
+				service.js
 				utils.js
 				eventtarget.js
 				controller.js
