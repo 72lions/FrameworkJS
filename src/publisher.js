@@ -68,7 +68,7 @@ FrameworkJS.Publisher = function(global) {
         if (typeof subscribers !== 'undefined') {
             for (var i = 0; i < subscribers.length; i++) {
                 if (typeof subscribers[i].onNotify !== 'undefined') {
-                    subscribers[i].onNotify.call(subscribers[i], args);
+                    subscribers[i].onNotify.call(subscribers[i], {message: message, params: args});
                 }
             };
         }

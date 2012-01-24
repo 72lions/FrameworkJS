@@ -112,12 +112,14 @@ FrameworkJS.Controller = function() {
     };
 
     /**
-     * This function is called when
+     * This function is called by the Publisher
      *
-     * @param  {Object} args The arguments that were send from the observable
+     * @param  {Object} arguments The arguments that were send from the observable
+     * @param {Object} arguments.message The message
+     * @param {Object} arguments.params The parameters that were sent from the notifier
      * @author Thodoris Tsiridis
      */
-    this.onNotify = function(args) {
+    this.onNotify = function(arguments) {
     };
 
     /**
