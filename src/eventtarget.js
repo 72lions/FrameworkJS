@@ -48,8 +48,11 @@ FrameworkJS.EventTarget = function () {
      */
     this.dispatchEvent = function ( event ) {
         var events = listeners[ event.type ];
-        for ( var i = 0; i < events.length; i++ ) {
-            events[i].callback.call( events[i].context, event );
+
+        if (typeof events !== 'undefined') {
+            for ( var i = 0; i < events.length; i++ ) {
+                events[i].callback.call( events[i].context, event );
+            }
         }
 
     };
@@ -64,18 +67,20 @@ FrameworkJS.EventTarget = function () {
      * @author Thodoris Tsiridis
      */
     this.removeEventListener = function ( type, listener, ctx) {
-
+        var index;
         var events = listeners[type];
 
-        for (var i = 0; i < events.length; i++) {
-            if (events[i].callback === listener && events[i].context === ctx) {
-               index = i;
-               break;
+        if (typeof events !== 'undefined') {
+            for (var i = 0; i < events.length; i++) {
+                if (events[i].callback === listener && events[i].context === ctx) {
+                   index = i;
+                   break;
+                }
             }
-        }
 
-        if ( index !== - 1 ) {
-            listeners[ type ].splice( index, 1 );
+            if ( index !== - 1 ) {
+                listeners[ type ].splice( index, 1 );
+            }
         }
 
     };

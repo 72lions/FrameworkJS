@@ -76,18 +76,6 @@
             gridController1.unsubscribe('onApplicationReady');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
 
-
-            // Adding the event listeners
-            gridView1.addEventListener('onTest', onTest, this);
-            gridView1.addEventListener('onTest', onTest2, this);
-
-            // Dispatching
-            gridView1.dispatchEvent({type:'onTest'});
-
-            // Remove the event listeners
-            gridView1.removeEventListener('onTest', onTest, this);
-            gridView1.removeEventListener('onTest', onTest2, this);
-
             // Dispatching
             gridView1.dispatchEvent({type:'onTest'});
 
@@ -95,6 +83,17 @@
             gridController1.name = 'GridController1';
             gridController1.setView(gridView1);
             gridController1.setModel(gridModel1);
+
+            // Adding the event listeners
+            gridController1.getView().addEventListener('onTest', onTest, gridController1);
+            gridController1.getView().addEventListener('onTest', onTest2, gridController1);
+
+            // Dispatching
+            gridView1.dispatchEvent({type:'onTest'});
+
+            // Remove the event listeners
+            gridController1.getView().removeEventListener('onTest', onTest, this);
+            gridController1.getView().removeEventListener('onTest', onTest2, this);
 
         </script>
     </body>
