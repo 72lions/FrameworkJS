@@ -27,14 +27,19 @@ FrameworkJS.Publisher = function(global) {
      */
     this.subscribe = function(message, subscriber) {
 
-        if (typeof _subscribers[message] === 'undefined') {
-            _subscribers[message] = [];
-        }
+        if (typeof message !== 'undefined' && typeof subscriber !== 'undefined') {
 
-        if (_subscribers[message].indexOf(subscriber) === -1) {
-            _subscribers[message].push(subscriber);
-        }
+            if (typeof _subscribers[message] === 'undefined') {
+                _subscribers[message] = [];
+            }
 
+            if (_subscribers[message].indexOf(subscriber) === -1) {
+                _subscribers[message].push(subscriber);
+            }
+
+        } else {
+            console.log('FrameworkJS.Publisher.subscribe: You must provide a message and a subscriber');
+        }
     };
 
     /**
@@ -47,11 +52,17 @@ FrameworkJS.Publisher = function(global) {
     this.unsubscribe = function(message, subscriber) {
         var index;
 
-        if (typeof _subscribers[message] !== 'undefined') {
-            index = _subscribers[message].indexOf(subscriber);
-            if ( index !== -1) {
-                _subscribers[message].splice(index, 1);
+        if (typeof message !== 'undefined' && typeof subscriber !== 'undefined') {
+            if (typeof _subscribers[message] !== 'undefined') {
+                index = _subscribers[message].indexOf(subscriber);
+                if ( index !== -1) {
+                    _subscribers[message].splice(index, 1);
+                }
+            } else {
+                console.log('Warning: FrameworkJS.Publisher.unsubscribe: There are no subscribers for that message');
             }
+        } else {
+            console.log('FrameworkJS.Publisher.unsubscribe: You must provide a message and a subscriber');
         }
     };
 
@@ -63,14 +74,21 @@ FrameworkJS.Publisher = function(global) {
      * @author Thodoris Tsiridis
      */
     this.notify = function(message, args) {
-        subscribers = _subscribers[message];
+        var subscribers;
 
-        if (typeof subscribers !== 'undefined') {
-            for (var i = 0; i < subscribers.length; i++) {
-                if (typeof subscribers[i].onNotify !== 'undefined') {
-                    subscribers[i].onNotify.call(subscribers[i], {message: message, params: args});
-                }
-            };
+        if (typeof message !== 'undefined' && typeof subscriber !== 'undefined') {
+            subscribers = _subscribers[message];
+            if (typeof subscribers !== 'undefined') {
+                for (var i = 0; i < subscribers.length; i++) {
+                    if (typeof subscribers[i].onNotify !== 'undefined') {
+                        subscribers[i].onNotify.call(subscribers[i], {message: message, params: args});
+                    }
+                };
+            } else {
+                console.log('Warning: FrameworkJS.Publisher.notify: There are no subscribers for that message');
+            }
+        } else {
+            console.log('FrameworkJS.Publisher.notify: You must provide a message and a subscriber');
         }
     };
 

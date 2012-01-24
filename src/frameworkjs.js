@@ -48,19 +48,19 @@ var FrameworkJS = {
                     if (typeof FrameworkJS._types[classType] === 'undefined'){
                         FrameworkJS._types[classType] = what;
                     } else {
-                        console.log('You are trying to register an object type that already exists... Nothing will happen');
+                        console.log('FrameworkJS.extend: You are trying to register an object type that already exists... Nothing will happen');
                     }
                     return what;
                 } else {
-                    console.log('FrameworkJS.extent: Invalid source object');
+                    console.log('FrameworkJS.extend: Invalid source object');
                     return null;
                 }
             } else {
-                console.log('FrameworkJS.extent: Target object has no prototype');
+                console.log('FrameworkJS.extend: Target object has no prototype');
                 return null;
             }
         } else {
-            console.log('FrameworkJS.extent: Target object is null');
+            console.log('FrameworkJS.extend: Target object is null');
             return null;
         }
     },
