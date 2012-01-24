@@ -58,7 +58,7 @@ FrameworkJS.Publisher = function(global) {
     /**
      * It will notify all the registered subscribers
      *
-     * @param  {[type]} message The message that will be used for notifying the subscribers
+     * @param  {String} message The message that will be used for notifying the subscribers
      * @param {Object} args The arguments that will passed on the subscriber
      * @author Thodoris Tsiridis
      */
