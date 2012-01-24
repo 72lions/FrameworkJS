@@ -5,8 +5,10 @@
         <title>Testing FrameworkJS</title>
     </head>
     <body>
+        <script type="text/javascript" src="../src/json2.js"></script>
         <script type="text/javascript" src="../src/frameworkjs.js"></script>
         <script type="text/javascript" src="../src/publisher.js"></script>
+        <script type="text/javascript" src="../src/ajax.js"></script>
         <script type="text/javascript" src="../src/utils.js"></script>
         <script type="text/javascript" src="../src/eventtarget.js"></script>
         <script type="text/javascript" src="../src/controller.js"></script>
@@ -94,6 +96,19 @@
             // Remove the event listeners
             gridController1.getView().removeEventListener('onTest', onTest, this);
             gridController1.getView().removeEventListener('onTest', onTest2, this);
+
+            // Testing the ajax utility
+            FrameworkJS.Ajax({
+                method: 'GET',
+                dataType: 'json',
+                url: 'data.json',
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (error) {
+
+                }
+            });
 
         </script>
     </body>

@@ -76,19 +76,19 @@ FrameworkJS.Publisher = function(global) {
     this.notify = function(message, args) {
         var subscribers;
 
-        if (typeof message !== 'undefined' && typeof subscriber !== 'undefined') {
+        if (typeof message !== 'undefined') {
             subscribers = _subscribers[message];
             if (typeof subscribers !== 'undefined') {
                 for (var i = 0; i < subscribers.length; i++) {
                     if (typeof subscribers[i].onNotify !== 'undefined') {
-                        subscribers[i].onNotify.call(subscribers[i], {message: message, params: args});
+                        subscribers[i].onNotify.call(subscribers[i], {message: message, params: args || {} });
                     }
                 };
             } else {
                 console.log('Warning: FrameworkJS.Publisher.notify: There are no subscribers for that message');
             }
         } else {
-            console.log('FrameworkJS.Publisher.notify: You must provide a message and a subscriber');
+            console.log('FrameworkJS.Publisher.notify: You must provide a message');
         }
     };
 
