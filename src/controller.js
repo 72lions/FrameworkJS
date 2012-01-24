@@ -111,4 +111,33 @@ FrameworkJS.Controller = function() {
       this._model = model;
     };
 
+    /**
+     * This function is called when
+     *
+     * @param  {Object} args The arguments that were send from the observable
+     * @author Thodoris Tsiridis
+     */
+    this.onNotify = function(args) {
+    };
+
+    /**
+     * Subscribes on specific messages
+     *
+     * @param  {String} message The message that will subscribe to
+     * @author Thodoris Tsiridis
+     */
+    this.subscribe = function(message) {
+        FrameworkJS.Publisher.subscribe(message, this);
+    };
+
+    /**
+     * Unsubscribes on specific messages
+     *
+     * @param  {String} message The message that will unsubscribe from
+     * @author Thodoris Tsiridis
+     */
+    this.unsubscribe = function(message) {
+        FrameworkJS.Publisher.unsubscribe(message, this);
+    };
+
 };

@@ -6,6 +6,7 @@
     </head>
     <body>
         <script type="text/javascript" src="../src/frameworkjs.js"></script>
+        <script type="text/javascript" src="../src/publisher.js"></script>
         <script type="text/javascript" src="../src/utils.js"></script>
         <script type="text/javascript" src="../src/eventtarget.js"></script>
         <script type="text/javascript" src="../src/controller.js"></script>
@@ -69,6 +70,12 @@
             var gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid', FrameworkJS.VIEW);
             var gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid', FrameworkJS.MODEL);
             var gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FrameworkJS.CONTROLLER);
+
+            gridController1.subscribe('onApplicationReady');
+            FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
+            gridController1.unsubscribe('onApplicationReady');
+            FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
+
 
             // Adding the event listeners
             gridView1.addEventListener('onTest', onTest, this);
