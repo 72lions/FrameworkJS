@@ -17,15 +17,11 @@
         <script type="text/javascript" src="../src/model.js"></script>
         <script type="text/javascript">
 
-            var arr = [1,2,3,4];
-            var number = 1;
-            var object = {a: 1};
-
             var  gridController1, gridView1, gridModel1, gridService1;
             var onTest, onTest2;
             var GridController, GridModel, GridView, GridService;
 
-            //Create a new Controller.Grid controller
+            //Create a new Controller.Grid controller by extending a controller
             GridController =  FrameworkJS.extend(function() {
                 // Overwritting the properties
                 this.name = 'GridController';
@@ -38,7 +34,7 @@
                 this.data = {title: "MyTitle"};
             }, FrameworkJS.Model, 'Model.Grid');
 
-            // Create a View.Grid view
+            // Create a View.Grid view by extending a view
             GridView = FrameworkJS.extend(function () {
                 // Overwritting the properties
                 this.name = 'GridView';
@@ -52,7 +48,7 @@
                 };
             }, FrameworkJS.View, 'View.Grid');
 
-            // Create a new Service.Grid service
+            // Create a new Service.Grid service by extending a service
             GridService = FrameworkJS.extend(function() {
                 // Overwriting the onSuccess function
                 this.onSuccess = function(result, request) {
@@ -77,10 +73,10 @@
             };
 
             // Creating the controllers, views, models and services
-            gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid', FrameworkJS.VIEW);
-            gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid', FrameworkJS.MODEL);
-            gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid', FrameworkJS.CONTROLLER);
-            gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid', FrameworkJS.SERVICE);
+            gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid');
+            gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid');
+            gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid');
+            gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid');
 
             // Subscribing example
             gridController1.subscribe('onApplicationReady');
@@ -103,6 +99,11 @@
             // Remove the event listeners
             gridController1.getView().removeEventListener('onTest', onTest, this);
             gridController1.getView().removeEventListener('onTest', onTest2, this);
+
+
+            // Dispatching
+            gridView1.dispatchEvent({type:'onTest'});
+
 
             // Call the service
             gridService1.url = 'data.json';
