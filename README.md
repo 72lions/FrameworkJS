@@ -1,5 +1,5 @@
 # FrameworkJS
-Another MVC framework for Javascript. FrameworkJS also has built in support for Observers and Commands.
+Another MVC framework for Javascript. FrameworkJS has built in support for Models, Views, Controllers and Services. It supports a strip-down Publisher/Subscriber pattern and it also has a utility for doing AJAX calls.
 
 ## Examples
 
