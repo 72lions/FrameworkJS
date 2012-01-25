@@ -14,7 +14,7 @@
 	</taskdef>
 
 	<property name="dist.merged.file.js" value="${dist.js.dir}/frameworkjs.merged.js"/>
-	<property name="dist.compressed.file.js" value="${dist.js.dir}/frameworkjs.merged.min.js" />
+	<property name="dist.compressed.file.js" value="${dist.js.dir}/frameworkjs.min.js" />
 
 	<!-- Merges all javascript files into one. Remember, order matters! -->
 	<target name="merge-global-js">

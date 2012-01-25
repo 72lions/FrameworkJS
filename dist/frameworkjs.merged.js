@@ -488,28 +488,12 @@ if (!JSON) {
 var FrameworkJS = {
 
     /**
-     * An object holding all the different models
+     * An object holding all the different classes
      *
      * @private
      * @type Object
      */
-    _models: {},
-
-    /**
-     * An object holding all the different views
-     *
-     * @private
-     * @type Object
-     */
-    _views: {},
-
-    /**
-     * An object holding all the different controllers
-     *
-     * @private
-     * @type Object
-     */
-    _controllers: {},
+    _classes: {},
 
     /**
      * An object holding all the different class _types
@@ -524,7 +508,7 @@ var FrameworkJS = {
      * @param  {Function} what      The function that we want to extend
      * @param  {Function} withWhat  The class that we want to use for extending
      * @param  {String} classType The class type of the new extended function
-     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller}
+     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller || FrameworkJS.Service}
      */
     extend: function (what, withWhat, classType) {
 
@@ -562,131 +546,42 @@ var FrameworkJS = {
      */
     retrieve: function (id, classType, type) {
 
-        if (type === FrameworkJS.CONTROLLER) {
+        var className, id, model, controllerObj;
+        var exists = -1;
 
-            var className, id, model, controllerObj;
-            var exists = -1;
+        className = classType || 'Generic.Controller';
+        id = id || ('_id_' + Math.floor(Math.random()*10000).toString());
 
-            className = classType || 'Generic.Controller';
-            id = id || ('_id_' + Math.floor(Math.random()*10000).toString());
+        // Check if there is an array with objects of className type
+        // If not then create a new array
+        if(!FrameworkJS._classes[className] || !FrameworkJS.Utils.isArray(FrameworkJS._classes[className])) {
+            FrameworkJS._classes[className] = [];
+        }
 
-            // Check if there is an array with objects of className type
-            // If not then create a new array
-            if(!FrameworkJS._controllers[id] || !FrameworkJS.Utils.isArray(FrameworkJS._controllers[id])) {
-                FrameworkJS._controllers[id] = [];
+        // Loop through al the items in the array
+        // to check if an item with this id already exists
+        for (var i = FrameworkJS._classes[className].length - 1; i >= 0; i--) {
+            if(FrameworkJS._classes[className][i].id == id){
+                exists = i;
+                break;
             }
+        }
 
-            // Loop through al the items in the array
-            // to check if an item with this id already exists
-            for (var i = FrameworkJS._controllers[id].length - 1; i >= 0; i--) {
-                if(FrameworkJS._controllers[id][i].id == id){
-                    exists = i;
-                    break;
-                }
-            }
-
-            if(exists === -1){
-                // Check if the class that we want to load exists
-                if(FrameworkJS._types[className] !== undefined){
-                    controllerObj = {id: id, classType: new FrameworkJS._types[className]()};
-                } else {
-                    // Create a generic controller
-                    controllerObj = {id: id, classType: new FrameworkJS.Controller()};
-                }
-
-                FrameworkJS._controllers[id].push(controllerObj);
-                controllerObj.classType.id = id;
-                return controllerObj.classType;
-
+        if(exists === -1){
+            // Check if the class that we want to load exists
+            if(FrameworkJS._types[className] !== undefined){
+                controllerObj = {id: id, classType: new FrameworkJS._types[className]()};
             } else {
-                return FrameworkJS._controllers[id][exists].classType;
+                // Create a generic controller
+                controllerObj = {id: id, classType: new FrameworkJS.Controller()};
             }
 
-        } else if (type === FrameworkJS.VIEW) {
-
-            var viewObj, id, className;
-            var exists = -1;
-
-            className = classType || 'Generic.View';
-            id = id || ('_id_' + Math.floor(Math.random()*10000).toString());
-
-            // Check if there is an array with objects of className type
-            // If not then create a new array
-            if(!FrameworkJS._views[className] || !FrameworkJS.Utils.isArray(FrameworkJS._views[className])) {
-                FrameworkJS._views[className] = [];
-            }
-
-            // Loop through al the items in the array
-            // to check if an item with this id already exists
-            for (var i = FrameworkJS._views[className].length - 1; i >= 0; i--) {
-                if(FrameworkJS._views[className][i].id == id){
-                    exists = i;
-                }
-            }
-
-            if(exists === -1){
-
-                exists = null;
-
-                // Check if the class that we want to load exists
-                if(FrameworkJS._types[className] !== undefined){
-                    viewObj = {id: id, classType: new FrameworkJS._types[className]()};
-                } else {
-                    viewObj = {id: id, classType: new FrameworkJS.View()};
-                }
-
-                FrameworkJS._views[className].push(viewObj);
-                viewObj.classType.id = id;
-                return viewObj.classType;
-
-            } else {
-                return FrameworkJS._views[className][exists].classType;
-            }
-
-        } else if( type === FrameworkJS.MODEL) {
-
-            var exists = -1, modelObj, className;
-
-            className = classType || 'Generic.Model';
-            id = id || ('_id_' + Math.floor(Math.random()*10000).toString());
-
-            // Check if there is an array with objects of className type
-            // If not then create a new array
-            if(!FrameworkJS._models[className] || !FrameworkJS.Utils.isArray(FrameworkJS._models[className])) {
-                FrameworkJS._models[className] = [];
-            }
-
-            // Loop through al the items in the array
-            // to check if an item with this id already exists
-            for (var i = FrameworkJS._models[className].length - 1; i >= 0; i--) {
-                if(FrameworkJS._models[className][i].id == id){
-                    exists = i;
-                }
-            }
-
-            if(exists === -1){
-
-                exists = null;
-
-                // Check if the class that we want to load exists
-                if(FrameworkJS._types[className] !== undefined){
-                    modelObj = {id: id, classType: new  FrameworkJS._types[className]()};
-                } else {
-                    modelObj = {id: id, classType: new FrameworkJS.Model()};
-                }
-
-                FrameworkJS._models[className].push(modelObj);
-                modelObj.classType.id = id;
-                return modelObj.classType;
-
-            } else {
-                return FrameworkJS._models[className][exists].classType;
-            }
+            FrameworkJS._classes[className].push(controllerObj);
+            controllerObj.classType.id = id;
+            return controllerObj.classType;
 
         } else {
-
-            /*console.log('FrameworkJS.retrieve: Not a valid class type', type)*/;
-            return null;
+            return FrameworkJS._classes[className][exists].classType;
         }
 
     },
@@ -716,7 +611,16 @@ var FrameworkJS = {
      * @property MODEL
      * @default 'model'
      */
-    MODEL: 'model'
+    MODEL: 'model',
+
+    /**
+     * A service constant
+     *
+     *@type String
+     * @property SERVICE
+     * @default 'service'
+     */
+    SERVICE: 'service'
 
 };
 /**
@@ -944,7 +848,7 @@ FrameworkJS.Ajax = function(settings) {
      * Executes an ajax call
      * @author Thodoris Tsiridis
      */
-    var execute = function () {
+    this.execute = function () {
 
         var xmlhttp;
         var url  = _settings.url;
@@ -1010,8 +914,103 @@ FrameworkJS.Ajax = function(settings) {
         }
     };
 
-    // Make the ajax call
-    execute();
+    return this;
+
+};
+/**
+ * Base Service
+ *
+ * @module 72lions
+ * @class Service
+ * @namespace FrameworkJS
+ * @author Thodoris Tsiridis
+ * @version 1.0
+ */
+FrameworkJS.Service = function() {
+
+    /**
+     * The view id
+     *
+     * @type String
+     * @default ''
+     */
+    this.id = '';
+
+    /**
+     * The url for the service to use
+     *
+     * @type String
+     * @default ''
+     */
+    this.url = '';
+
+    /**
+     * The url for the service to use
+     *
+     * @type String
+     * @default ''
+     */
+    this.method = 'GET';
+
+    /**
+     * The data type
+     *
+     * @type String
+     * @default 'text'
+     */
+    this.dataType = 'text';
+
+    /**
+     * The data
+     *
+     * @type String
+     * @default ''
+     */
+    this.data = '';
+
+    /**
+     * True if it is async
+     *
+     * @type Boolean
+     * @default true
+     */
+    this.async = true;
+
+    /**
+     * Fetches the data
+     * @author Thodoris Tsiridis
+     */
+    this.fetch = function() {
+
+        var ajax = new FrameworkJS.Ajax({
+            method: this.method,
+            dataType: this.dataType,
+            url: this.url,
+            success: this.onSuccess,
+            error: this.onError
+        }).execute();
+
+    };
+
+    /**
+     * Is triggered when the fetch is successfull
+     *
+     * @param {String || Object || XML} result The result of the fetch
+     * @param {XMLHttpRequest} request The XMLHttpRequest
+     * @author Thodoris Tsiridis
+     */
+    this.onSuccess = function(result, request) {
+        /*console.log('success', result, request, this)*/;
+    };
+
+    /**
+     * Is triggered when the fetch is not successfull
+     * @param  {Object} error The error
+     * @author Thodoris Tsiridis
+     */
+    this.onError = function(error) {
+        /*console.log('error', error)*/;
+    };
 
 };
 /**
