@@ -3,7 +3,7 @@ Another MVC framework for Javascript. FrameworkJS has built in support for Model
 
 ## Examples
 
-**Create a controller "class" by extending the base controller**
+**Extending the base classes**
 
 In the following examples the first parameter is the class that you want to extend, the second parameter is the base class that you want to use for extending and the last one is the namespace.classname of the new class/function
 
