@@ -55,8 +55,8 @@
             // Create a new Service.Grid service
             GridService = FrameworkJS.extend(function() {
                 // Overwriting the onSuccess function
-                this.onSuccess = function(result) {
-                    console.log('Success dude!!!', result);
+                this.onSuccess = function(result, request) {
+                    console.log('Success dude!!!', result, request, this);
                 }
             }, FrameworkJS.Service, 'Service.Grid');
 

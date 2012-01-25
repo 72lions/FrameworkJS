@@ -63,7 +63,7 @@ FrameworkJS.Service = function() {
      */
     this.fetch = function() {
 
-        FrameworkJS.Ajax({
+        var ajax = new FrameworkJS.Ajax({
             method: this.method,
             dataType: this.dataType,
             url: this.url,
