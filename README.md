@@ -57,6 +57,7 @@ var gridModel = FrameworkJS.retrieve('gridModel', 'Model.Grid');
 // Create a service
 var gridService = FrameworkJS.retrieve('gridService', 'Service.Grid');
 ```
+If the controller of "class" Controller.Grid with id 'SomeId' doesn't exist then it will create one else it will return the already existing one.
 
 **Basic controller setup**
 
@@ -66,7 +67,6 @@ gridController.name = 'GridController1';
 gridController.setView(gridView);
 gridController.setModel(gridModel);
 ```
-If the controller of "class" Controller.Grid with id 'SomeId' doesn't exist then it will create one else it will return the already existing one.
 
 **Events**
 
