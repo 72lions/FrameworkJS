@@ -62,9 +62,9 @@ var gridService = FrameworkJS.retrieve('gridService', 'Service.Grid');
 
 ```javascript
 // Setup the controller
-gridController1.name = 'GridController1';
-gridController1.setView(gridView1);
-gridController1.setModel(gridModel1);
+gridController.name = 'GridController1';
+gridController.setView(gridView);
+gridController.setModel(gridModel);
 ```
 If the controller of "class" Controller.Grid with id 'SomeId' doesn't exist then it will create one else it will return the already existing one.
 
@@ -102,9 +102,9 @@ gridController.removeEventListener(
 
 ```javascript
 // Subscribe example. Subscribe on the 'onApplicationReady' message
-gridController1.subscribe('onApplicationReady');
+gridController.subscribe('onApplicationReady');
 // Send a notification
 FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
 // Unsubscribe from all the 'onApplicationReady' notifications
-gridController1.unsubscribe('onApplicationReady');
+gridController.unsubscribe('onApplicationReady');
 ```
