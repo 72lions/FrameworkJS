@@ -26,7 +26,7 @@ FrameworkJS.EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.addEventListener = function ( type, listener, ctx ) {
+    this.bind = function ( type, listener, ctx ) {
         var obj = {callback: listener, context: ctx};
 
         if ( listeners[ type ] === undefined ) {
@@ -46,7 +46,7 @@ FrameworkJS.EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.dispatchEvent = function ( event ) {
+    this.trigger = function ( event ) {
         var events = listeners[ event.type ];
 
         if (typeof events !== 'undefined') {
@@ -66,7 +66,7 @@ FrameworkJS.EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.removeEventListener = function ( type, listener, ctx) {
+    this.unbind = function ( type, listener, ctx) {
         var index;
         var events = listeners[type];
 

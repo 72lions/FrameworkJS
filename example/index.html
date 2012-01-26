@@ -90,19 +90,19 @@
             gridController1.setModel(gridModel1);
 
             // Adding the event listeners
-            gridController1.getView().addEventListener('onTest', onTest, gridController1);
-            gridController1.getView().addEventListener('onTest', onTest2, gridController1);
+            gridController1.getView().bind('onTest', onTest, gridController1);
+            gridController1.getView().bind('onTest', onTest2, gridController1);
 
             // Dispatching
-            gridView1.dispatchEvent({type:'onTest'});
+            gridView1.trigger({type:'onTest'});
 
             // Remove the event listeners
-            gridController1.getView().removeEventListener('onTest', onTest, this);
-            gridController1.getView().removeEventListener('onTest', onTest2, this);
+            gridController1.getView().unbind('onTest', onTest, this);
+            gridController1.getView().unbind('onTest', onTest2, this);
 
 
             // Dispatching
-            gridView1.dispatchEvent({type:'onTest'});
+            gridView1.trigger({type:'onTest'});
 
 
             // Call the service
