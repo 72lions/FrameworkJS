@@ -21,20 +21,46 @@
             var onTest, onTest2;
             var GridController, GridModel, GridView, GridService;
 
-            //Create a new Controller.Grid controller by extending a controller
+            /*
+            ------------------------------------
+            EXTENDING THE BASE CONTROLLER CLASS
+            ------------------------------------
+            */
+
             GridController =  FrameworkJS.extend(function() {
                 // Overwritting the properties
                 this.name = 'GridController';
+
+                this.addListeners = function() {
+                    // Listen to the a change of a specific model property
+                    this.getModel().bind('change:prop1', onProperty1Changed, this);
+                }
+
+                var onProperty1Changed = function (event) {
+                    console.log('Property 1 has changed. We got an event type of', event.type, 'and with value', event.value);
+                };
+
             }, FrameworkJS.Controller, 'Controller.Grid');
 
-            //Create a new Controller.Grid controller
+            /*
+            ------------------------------------
+            EXTENDING THE BASE MODEL CLASS
+            ------------------------------------
+            */
+
             GridModel =  FrameworkJS.extend(function() {
                 // Overwritting the properties
                 this.name = 'GridModel';
-                this.data = {title: "MyTitle"};
+                this.data = {title: "MyTitle", prop1: 'Property 1'};
+
             }, FrameworkJS.Model, 'Model.Grid');
 
-            // Create a View.Grid view by extending a view
+            /*
+            ------------------------------------
+            EXTENDING THE BASE VIEW CLASS
+            ------------------------------------
+            */
+
             GridView = FrameworkJS.extend(function () {
                 // Overwritting the properties
                 this.name = 'GridView';
@@ -48,13 +74,26 @@
                 };
             }, FrameworkJS.View, 'View.Grid');
 
-            // Create a new Service.Grid service by extending a service
+            /*
+            ------------------------------------
+            EXTENDING THE BASE SERVICE CLASS
+            ------------------------------------
+            */
+
             GridService = FrameworkJS.extend(function() {
                 // Overwriting the onSuccess function
                 this.onSuccess = function(result, request) {
                     console.log('Success dude!!!', result, request, this);
                 }
             }, FrameworkJS.Service, 'Service.Grid');
+
+
+            /*
+            ------------------------------------
+            DECLARING THE FUNCTIONS THAT WILL BE
+            USED ON THE EVENTS EXAMPLE
+            ------------------------------------
+            */
 
             /**
              * Triggered when the onTest event is dispatched
@@ -72,43 +111,77 @@
                 console.log('onTest2', event);
             };
 
-            // Creating the controllers, views, models and services
+            /*
+            ------------------------------------
+            INSTANTIATING INSTANCES OF THE NEW CLASSES
+            ------------------------------------
+            */
+
             gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid');
             gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid');
             gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid');
             gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid');
 
-            // Subscribing example
+            /*
+            ------------------------------------
+            SETTING UP A CONTROLLER AND RUNNING A CUSTOM
+            FUNCTION OF THAT INSTANCE OF THE CONTROLLER
+            ------------------------------------
+            */
+
+            gridController1.name = 'GridController1';
+            gridController1.setView(gridView1);
+            gridController1.setModel(gridModel1);
+            // We execute the addListeners after we set up the model
+            gridController1.addListeners();
+
+            /*
+            ------------------------------------
+            WORKING WITH EVENTS
+            ------------------------------------
+            */
+
+            gridController1.getView().bind('onTest', onTest, gridController1);
+            gridController1.getView().bind('onTest', onTest2, gridController1);
+
+            gridView1.trigger({type:'onTest'});
+
+            gridController1.getView().unbind('onTest', onTest, this);
+            gridController1.getView().unbind('onTest', onTest2, this);
+
+            gridView1.trigger({type:'onTest'});
+
+            /*
+            ------------------------------------
+            TESTING THE PUBLISH/SUBSCRIBE UTILITY
+            ------------------------------------
+            */
+
             gridController1.subscribe('onApplicationReady');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
             gridController1.unsubscribe('onApplicationReady');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
 
-            // Setup the controller
-            gridController1.name = 'GridController1';
-            gridController1.setView(gridView1);
-            gridController1.setModel(gridModel1);
+            /*
+            ------------------------------------
+            WORKING WITH A SERVICE
+            ------------------------------------
+            */
 
-            // Adding the event listeners
-            gridController1.getView().bind('onTest', onTest, gridController1);
-            gridController1.getView().bind('onTest', onTest2, gridController1);
-
-            // Dispatching
-            gridView1.trigger({type:'onTest'});
-
-            // Remove the event listeners
-            gridController1.getView().unbind('onTest', onTest, this);
-            gridController1.getView().unbind('onTest', onTest2, this);
-
-
-            // Dispatching
-            gridView1.trigger({type:'onTest'});
-
-
-            // Call the service
             gridService1.url = 'data.json';
             gridService1.dataType = 'json';
             gridService1.fetch();
+
+            /*
+            ------------------------------------
+            CHANGING A PROPERTY OF THE MODEL
+            SO THAT WE CAN CHECK IF THE CONTROLLER
+            WILL SUCCESSFULLY LISTEN FOR THAT CHANGE
+            ------------------------------------
+            */
+
+            gridModel1.set({prop1: 'Property 11', prop2: 'Property 2'});
+
 
         </script>
     </body>
