@@ -1083,7 +1083,7 @@ FrameworkJS.EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.addEventListener = function ( type, listener, ctx ) {
+    this.bind = function ( type, listener, ctx ) {
         var obj = {callback: listener, context: ctx};
 
         if ( listeners[ type ] === undefined ) {
@@ -1103,7 +1103,7 @@ FrameworkJS.EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.dispatchEvent = function ( event ) {
+    this.trigger = function ( event ) {
         var events = listeners[ event.type ];
 
         if (typeof events !== 'undefined') {
@@ -1123,7 +1123,7 @@ FrameworkJS.EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.removeEventListener = function ( type, listener, ctx) {
+    this.unbind = function ( type, listener, ctx) {
         var index;
         var events = listeners[type];
 
@@ -1254,6 +1254,18 @@ FrameworkJS.Controller = function() {
      */
     this.setModel = function(model) {
       this._model = model;
+      this._model.unbind('change', this.onModelChange, this);
+      this._model.bind('change', this.onModelChange, this);
+    };
+
+    /**
+     * Triggered when a property of the model has changed
+     *
+     * @param  {Object} event The event
+     * @author Thodoris Tsiridis
+     */
+    this.onModelChange = function (event) {
+
     };
 
     /**
@@ -1444,6 +1456,8 @@ FrameworkJS.View = function() {
  */
 FrameworkJS.Model = function(){
 
+    FrameworkJS.EventTarget.call(this);
+
     /**
      * The object that holds the data
      *
@@ -1469,14 +1483,44 @@ FrameworkJS.Model = function(){
     this.id = '';
 
     /**
-     * Saves a value to a specific key of the model
+     * Saves values to a specific key of the model
      *
-     * @param {String} key The key of the data object to be set
-     * @param {Object || String || Number || Array} value The value to save on the specific key
+     * @param {Object} properties The properties to change
      * @author Thodoris Tsiridis
      */
-    this.set = function(key, value) {
-        this.data[key] = value;
+    this.set = function(properties) {
+        var changed;
+        var changedProperties;
+
+        for(key in properties){
+
+            changed = false;
+
+            if (typeof this.data[key] !== 'undefined') {
+
+                if (this.data[key] !== properties[key]) {
+                    changed = true;
+                }
+
+            } else {
+                changed = true;
+            }
+
+            this.data[key] = properties[key];
+
+            if (changed) {
+                if( typeof changedProperties === 'undefined') {
+                    changedProperties = {};
+                }
+                this.trigger({type: 'change:' + key, value: properties[key]});
+                changedProperties[key] = properties[key];
+            }
+        }
+
+        if( typeof changedProperties !== 'undefined') {
+            this.trigger({type: 'change', value: changedProperties});
+        }
+
     };
 
     /**
