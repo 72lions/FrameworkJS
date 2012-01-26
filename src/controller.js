@@ -109,6 +109,18 @@ FrameworkJS.Controller = function() {
      */
     this.setModel = function(model) {
       this._model = model;
+      this._model.unbind('change', this.onModelChange, this);
+      this._model.bind('change', this.onModelChange, this);
+    };
+
+    /**
+     * Triggered when a property of the model has changed
+     *
+     * @param  {Object} event The event
+     * @author Thodoris Tsiridis
+     */
+    this.onModelChange = function (event) {
+
     };
 
     /**

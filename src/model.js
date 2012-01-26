@@ -9,6 +9,8 @@
  */
 FrameworkJS.Model = function(){
 
+    FrameworkJS.EventTarget.call(this);
+
     /**
      * The object that holds the data
      *
@@ -34,14 +36,44 @@ FrameworkJS.Model = function(){
     this.id = '';
 
     /**
-     * Saves a value to a specific key of the model
+     * Saves values to a specific key of the model
      *
-     * @param {String} key The key of the data object to be set
-     * @param {Object || String || Number || Array} value The value to save on the specific key
+     * @param {Object} properties The properties to change
      * @author Thodoris Tsiridis
      */
-    this.set = function(key, value) {
-        this.data[key] = value;
+    this.set = function(properties) {
+        var changed;
+        var changedProperties;
+
+        for(key in properties){
+
+            changed = false;
+
+            if (typeof this.data[key] !== 'undefined') {
+
+                if (this.data[key] !== properties[key]) {
+                    changed = true;
+                }
+
+            } else {
+                changed = true;
+            }
+
+            this.data[key] = properties[key];
+
+            if (changed) {
+                if( typeof changedProperties === 'undefined') {
+                    changedProperties = {};
+                }
+                this.trigger({type: 'change:' + key, value: properties[key]});
+                changedProperties[key] = properties[key];
+            }
+        }
+
+        if( typeof changedProperties !== 'undefined') {
+            this.trigger({type: 'change', value: changedProperties});
+        }
+
     };
 
     /**
