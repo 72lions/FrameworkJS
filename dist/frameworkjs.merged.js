@@ -736,46 +736,6 @@ FrameworkJS.Publisher = ( function() {
 FrameworkJS.Ajax = function(settings) {
 
     /**
-     * The constant for the post method type
-     *
-     * @type String
-     * @default 'POST'
-     */
-    this.POST = 'POST';
-
-    /**
-     * The constant for the get method type
-     *
-     * @type String
-     * @default 'GET'
-     */
-    this.GET = 'GET';
-
-    /**
-     * The constant for the json data type
-     *
-     * @type String
-     * @default 'json'
-     */
-    this.JSON = 'json';
-
-    /**
-     * The constant for the xml data type
-     *
-     * @type String
-     * @default 'xml'
-     */
-    this.XML = 'xml';
-
-    /**
-     * The constant for the text data type
-     *
-     * @type String
-     * @default 'text'
-     */
-    this.TEXT = 'text';
-
-    /**
      * The object that holds all the settings
      *
      * @private
@@ -784,6 +744,8 @@ FrameworkJS.Ajax = function(settings) {
      */
     var _settings = {};
 
+    settings = settings || {};
+
     /**
      * The method type
      *
@@ -791,7 +753,7 @@ FrameworkJS.Ajax = function(settings) {
      * @type String
      * @default 'GET'
      */
-    _settings.method = settings.method || this.GET;
+    _settings.method = settings.method || 'GET';
 
     /**
      * The data type
@@ -800,7 +762,7 @@ FrameworkJS.Ajax = function(settings) {
      * @type String
      * @default 'text'
      */
-    _settings.dataType = settings.dataType || this.TEXT;
+    _settings.dataType = settings.dataType || 'text';
 
         /**
      * The url
@@ -851,73 +813,115 @@ FrameworkJS.Ajax = function(settings) {
      * Executes an ajax call
      * @author Thodoris Tsiridis
      */
-    this.execute = function () {
-
-        var xmlhttp;
-        var url  = _settings.url;
-        var sendParams = '';
-        var result;
-
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        if (_settings.method === this.POST) {
-            sendParams = _settings.data;
-        } else {
-            url += (_settings.data !== '' ? '?' + _settings.data : '');
-        }
-
-        try {
-            xmlhttp.open(_settings.method, url, _settings.async);
-            xmlhttp.send(sendParams);
-        } catch (error) {
-            /*console.log('Error: FrameworkJS.Ajax:', error)*/;
-            if (typeof _settings.error !== 'undefined') {
-                _settings.error(error);
-            }
-        }
+    return {
 
         /**
-         * Triggered when there is a readyState change event
-         * @author Thodoris Tsiridis
+         * The constant for the post method type
+         *
+         * @type String
+         * @default 'POST'
          */
-        xmlhttp.onreadystatechange = function() {
-            var response;
+        POST: 'POST',
 
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        /**
+         * The constant for the get method type
+         *
+         * @type String
+         * @default 'GET'
+         */
+        GET: 'GET',
 
-                if (typeof _settings.success !== 'undefined') {
+        /**
+         * The constant for the json data type
+         *
+         * @type String
+         * @default 'json'
+         */
+        JSON: 'json',
 
-                    if (_settings.dataType === 'xml') {
-                        result = xmlhttp.responseXML;
-                    }
+        /**
+         * The constant for the xml data type
+         *
+         * @type String
+         * @default 'xml'
+         */
+        XML: 'xml',
 
-                    if (_settings.dataType === 'json') {
-                        result = JSON.parse(xmlhttp.responseText);
-                    }
+        /**
+         * The constant for the text data type
+         *
+         * @type String
+         * @default 'text'
+         */
+        TEXT: 'text',
 
-                    if (_settings.dataType === 'text') {
-                        result = xmlhttp.responseText;
-                    }
+        execute: function () {
 
-                    _settings.success(result, xmlhttp);
+            var xmlhttp;
+            var url  = _settings.url;
+            var sendParams = '';
+            var result;
 
-                }
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
 
-            } else if (xmlhttp.status == 404) {
+            if (_settings.method === this.POST) {
+                sendParams = _settings.data;
+            } else {
+                url += (_settings.data !== '' ? '?' + _settings.data : '');
+            }
 
+            try {
+                xmlhttp.open(_settings.method, url, _settings.async);
+                xmlhttp.send(sendParams);
+            } catch (error) {
+                /*console.log('Error: FrameworkJS.Ajax:', error)*/;
                 if (typeof _settings.error !== 'undefined') {
-                    _settings.error(xmlhttp);
+                    _settings.error(error);
                 }
+            }
 
+            /**
+             * Triggered when there is a readyState change event
+             * @author Thodoris Tsiridis
+             */
+            xmlhttp.onreadystatechange = function() {
+                var response;
+
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                    if (typeof _settings.success !== 'undefined') {
+
+                        if (_settings.dataType === 'xml') {
+                            result = xmlhttp.responseXML;
+                        }
+
+                        if (_settings.dataType === 'json') {
+                            result = JSON.parse(xmlhttp.responseText);
+                        }
+
+                        if (_settings.dataType === 'text') {
+                            result = xmlhttp.responseText;
+                        }
+
+                        _settings.success(result, xmlhttp);
+
+                    }
+
+                } else if (xmlhttp.status == 404) {
+
+                    if (typeof _settings.error !== 'undefined') {
+                        _settings.error(xmlhttp);
+                    }
+
+                }
             }
         }
-    };
 
-    return this;
+    }
 
 };
 /**
