@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <a href="http://72lions.com" target="_blank" id="logo">72lions.com</a>
+        <a href="#" id="logo">72lions.com</a>
         <hgroup>
             <h1>FrameworkJS</h1>
             <h2>Another MVC Javascript framework</h2>
@@ -20,6 +20,9 @@
         <div class="sidebar">
             <nav>
                 <ul>
+                    <li>
+                            <a href="#">Introduction</a>
+                    </li>
                     <li>
                         <a href="#">Controllers</a>
                         <ul>
@@ -79,8 +82,42 @@
         </div>
         <div class="contents">
             <div class="content">
-                This is the content
-                <pre>And this is some code</pre>
+                <h1>Introduction</h1>
+                <p>FrameworkJS is an MVC framework with support for Models, Views, Controllers and Services. It supports a strip-down Publisher/Subscriber pattern and it also has a utility for doing AJAX calls.</p>
+                <p>The project is hosted on <a href="https://github.com/72lions/FrameworkJS" target="_blank">Github</a> and you can report any issues on the <a href="https://github.com/72lions/FrameworkJS/issues" target="_blank">Github issues page</a> or you can tweet at <a href="http://twitter.com/72lions" target="_blank">@72lions</a> </p>
+                <h2>Dependencies</h2>
+                <p>FrameworkJS is depended only on Douglas Crockford's <a href="https://github.com/douglascrockford/JSON-js" target="_blank">JSON</a> utility. The framework includes the library so you don't have to downloaded yourself.</p>
+                <h1>FrameworkJS.Controller</h1>
+                <p>A controller is responsible for talking to a view and a model and also passing data from the model to the view. A view cannot talk to a model and a model can't talk to a view.</p>
+                <h2>Extending a controller</h2>
+                <p>Extending a controller is really easy.</p>
+                <pre>
+
+FrameworkJS.extend(function() {
+
+    this.someFunction = function() {
+
+        // Some code here...
+
+    };
+
+}, FrameworkJS.Controller, 'Controller.Grid');
+                </pre>
+                <p>The <code>FrameworkJS.extend</code> function takes three parameters. The first one is a function with the "class" structure, the second one is the base "class" and the last one is the "class" name. Since the "class" name is a string you can use something like <b>"namespace.classname"</b>.</p>
+                <h2>Instantiating a controller</h2>
+                <pre>
+var gridController = FrameworkJS.retrieve(
+    'SomeId',
+    'Controller.Grid');
+                </pre>
+                <p><code>FrameworkJS.retrieve</code> takes three parameters. The first one is the unique id of the instance. The second parameter is the "class" name that we provided when we extended the base controller "class".</p>
+                <h2>Get an instance of a controller</h2>
+                <p>We do the exact same thing that we did when we wanted to instantiate a controller but this time we give the id of a controller that already exists. </p>
+                <pre>
+var alreadyInstantiatedGridController = FrameworkJS.retrieve(
+    'SomeId',
+    'Controller.Grid');
+                </pre>
             </div>
         </div>
     </section>
