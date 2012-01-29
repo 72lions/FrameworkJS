@@ -1,0 +1,152 @@
+body {
+    background-image: url('http://72lions.com/assets/images/stripe_e7eb00fc0caa9bf17359f52ecb7f3416.png');
+    font-family: Georgia;
+    font-size: 13px;
+    color: #666;
+}
+
+h1, h2 {
+    padding: 0 0 5px 0;
+    margin: 0;
+    text-shadow: 0 1px white;
+    font-family: 'Oswald';
+    font-size: 28px;
+    font-weight: normal;
+    color: #666;
+}
+
+h2 {
+    font-size:18px;
+}
+
+a:link,
+a:visited {
+    color: #F02311;
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+    -webkit-transition: border-bottom .2s;
+    -moz-transition: border-bottom .2s;
+    -o-transition: border-bottom .2s;
+    transition: border-bottom .2s;
+    text-shadow: 0 1px white;
+
+}
+
+a:hover {
+    border-bottom: 1px dotted #F02311;
+}
+
+header #logo {
+    background-image: url('http://72lions.com/assets/images/logo.png');
+    background-repeat: no-repeat;
+
+    display: block;
+    position: fixed;
+    z-index: 1000;
+
+    top: 25px;
+    left: 24px;
+    width: 74px;
+    height: 74px;
+
+    text-indent: -9999px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+    -moz-box-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+    -o-box-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+    box-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+}
+
+header hgroup {
+    margin: 30px 0px 40px 125px;
+}
+
+header hgroup h2 {
+    font-family: 'Georgia';
+    font-size: 15px;
+}
+
+section.main {
+    margin-left: 125px;
+}
+
+section.main .sidebar {
+    float: left;
+
+    background-color: rgba(255,255,255,0.2);
+
+    width: 200px;
+    padding: 20px;
+
+}
+
+section.main .sidebar nav > ul {
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+section.main .sidebar nav > ul  ul {
+    padding-left: 5px;
+}
+
+section.main .sidebar nav ul li {
+    display: block;
+    list-style: none;
+    font-size: 13px;
+    padding: 4px 0px 4px 0px;
+}
+
+section.main .sidebar nav > ul > li {
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+section.main .sidebar nav > ul > li > a {
+    color: #666;
+    font-family: "Oswald";
+}
+
+section.main .sidebar nav > ul > li > ul {
+    padding-top: 5px;
+}
+
+section.main .contents {
+    margin-left: 260px;
+}
+
+section.main .contents .content {
+    margin-right:20px;
+}
+
+section.main pre, section.main code {
+    tab-size: 4;
+    -o-tab-size: 4;
+    -moz-tab-size: 4;
+    -webkit-tab-size: 4;
+    font-size: 11px;
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 12px rgba(0,0,0,0.2),0px 1px 1px rgba(255,255,255,1);
+    -moz-box-shadow: inset 0 0 12px rgba(0,0,0,0.2),0px 1px 1px rgba(255,255,255,1);
+    -o-box-shadow: inset 0 0 12px rgba(0,0,0,0.2),0px 1px 1px rgba(255,255,255,1);
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.2),0px 1px 1px rgba(255,255,255,1);
+    overflow-x: auto;
+    color: #333;
+}
+
+section.main code {
+    padding:6px;
+}
