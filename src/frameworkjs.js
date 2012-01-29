@@ -53,8 +53,8 @@ var FrameworkJS = {
      * Returns a Model, View or Controller based on the class type and id. If there is no object initialized with that id and class type then one is created
      * @param  {String} id        The id of the class that we want to get
      * @param  {String} classType The class type of the object that we want to get
-     * @param  {[type]} type      The type of the base class. e.x. 'model', 'view' or 'controller'
-     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller}
+     * @param  {[type]} type      The type of the base class. e.x. 'model', 'view', 'controller' or 'service'
+     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller || FrameworkJS.Service}
      * @author Thodoris Tsiridis
      */
     retrieve: function (id, classType, type) {
@@ -76,7 +76,7 @@ var FrameworkJS = {
         for (var i = FrameworkJS._classes[className].length - 1; i >= 0; i--) {
             if(FrameworkJS._classes[className][i].id == id){
                 exists = i;
-                break;
+                return FrameworkJS._classes[className][exists].classType;
             }
         }
 
@@ -93,10 +93,7 @@ var FrameworkJS = {
             controllerObj.classType.id = id;
             return controllerObj.classType;
 
-        } else {
-            return FrameworkJS._classes[className][exists].classType;
         }
-
     },
 
     /**

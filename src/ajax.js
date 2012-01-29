@@ -130,6 +130,10 @@ FrameworkJS.Ajax = function(settings) {
          */
         TEXT: 'text',
 
+        /**
+         * Executes an Ajax call
+         * @author Thodoris Tsiridis
+         */
         execute: function () {
 
             var xmlhttp;
