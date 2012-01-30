@@ -19,6 +19,7 @@ var FrameworkJS = (function(){
     return {
         /**
          * Extends a function
+         *
          * @param  {Function} what      The function that we want to extend
          * @param  {Function} withWhat  The class that we want to use for extending
          * @param  {String} classType The class type of the new extended function
@@ -52,6 +53,7 @@ var FrameworkJS = (function(){
 
         /**
          * Returns a Model, View or Controller based on the class type and id. If there is no object initialized with that id and class type then one is created
+         *
          * @param  {String} id        The id of the class that we want to get
          * @param  {String} classType The class type of the object that we want to get
          * @param  {[type]} type      The type of the base class. e.x. 'model', 'view', 'controller' or 'service'
@@ -94,6 +96,22 @@ var FrameworkJS = (function(){
                 controllerObj.classType.id = id;
                 return controllerObj.classType;
 
+            }
+        },
+
+        /**
+         * Returns a a class definition
+         *
+         * @param  {String} classType The class type of the object that we want to get
+         * @return {Funtion}
+         * @author Thodoris Tsiridis
+         */
+        getClass: function(classType) {
+            if (typeof _types[classType] !== 'undefined')  {
+                return _types[classType];
+            } else {
+                console.log('FrameworkJS.getClass: Class type ' + classType + ' does not exist');
+                return null;
             }
         },
 

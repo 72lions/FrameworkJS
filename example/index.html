@@ -17,9 +17,9 @@
         <script type="text/javascript" src="../src/model.js"></script>
         <script type="text/javascript">
 
-            var  gridController1, gridView1, gridModel1, gridService1;
+            var  gridController1, subGridController1, gridView1, gridModel1, gridService1;
             var onTest, onTest2;
-            var GridController, GridModel, GridView, GridService;
+            var GridController, SubGridController, GridModel, GridView, GridService;
 
             /*
             ------------------------------------
@@ -47,6 +47,13 @@
                 };
 
             }, FrameworkJS.Controller, 'Controller.Grid');
+
+            // Extending a custom class
+            SubGridController =  FrameworkJS.extend(function() {
+                // Overwritting the properties
+                this.name = 'SubGridController';
+
+            }, FrameworkJS.getClass('Controller.Grid'), 'SubController.Grid');
 
             /*
             ------------------------------------
@@ -135,6 +142,9 @@
 
             gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid');
             console.log('The new Controller.Grid instance with id:', gridController1.id, gridController1);
+
+            subGridController1 = FrameworkJS.retrieve('GRIDSUBCONTROLLER1', 'SubController.Grid');
+            console.log('The new SubController.Grid instance with id:', subGridController1.id, subGridController1);
 
             gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid');
             console.log('The new Service.Grid instance with id:', gridService1.id, gridService1);
