@@ -36,8 +36,14 @@
                     this.getModel().bind('change:prop1', onProperty1Changed, this);
                 }
 
+                this.onNotify = function (notification) {
+                    if(notification.message === 'onApplicationReady') {
+                        console.log('The onApplicationReady message was captured by the controller', notification);
+                    }
+                };
+
                 var onProperty1Changed = function (event) {
-                    console.log('Property 1 has changed. We got an event type of', event.type, 'and with value', event.value);
+                    console.log('prop1 has changed. We got an event type of', event.type, 'and a value of', event.value);
                 };
 
             }, FrameworkJS.Controller, 'Controller.Grid');
@@ -83,7 +89,7 @@
             GridService = FrameworkJS.extend(function() {
                 // Overwriting the onSuccess function
                 this.onSuccess = function(result, request) {
-                    console.log('Success dude!!!', result, request, this);
+                    console.log('The service made an ajax call', result, request, this);
                 }
             }, FrameworkJS.Service, 'Service.Grid');
 
@@ -100,7 +106,7 @@
              * @param  {Object} event The event
              */
             onTest = function(event){
-                console.log('onTest', event);
+                console.log('The onTest function is triggered', event);
             };
 
             /**
@@ -108,7 +114,7 @@
              * @param  {Object} event The event
              */
             onTest2 = function(event){
-                console.log('onTest2', event);
+                console.log('The onTest2 function is triggered', event);
             };
 
             /*
@@ -117,10 +123,21 @@
             ------------------------------------
             */
 
+            console.log('----------------------------------');
+            console.log('INSTANTIATING THE CLASSES');
+            console.log('----------------------------------');
+
             gridView1 = FrameworkJS.retrieve('GRIDVIEW1', 'View.Grid');
+            console.log('The new View.Grid instance with id:', gridView1.id, gridView1);
+
             gridModel1 = FrameworkJS.retrieve('GRIDMODEL1', 'Model.Grid');
+            console.log('The new Model.Grid instance with id:', gridModel1.id, gridModel1);
+
             gridController1 = FrameworkJS.retrieve('GRIDCONTROLLER1', 'Controller.Grid');
+            console.log('The new Controller.Grid instance with id:', gridController1.id, gridController1);
+
             gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid');
+            console.log('The new Service.Grid instance with id:', gridService1.id, gridService1);
 
             /*
             ------------------------------------
@@ -129,9 +146,19 @@
             ------------------------------------
             */
 
+            console.log('----------------------------------');
+            console.log('SETTING  UP THE CONTROLLER');
+            console.log('----------------------------------');
+
             gridController1.name = 'GridController1';
+            console.log('Changed the name of the controller to ', gridController1.name);
+
             gridController1.setView(gridView1);
+            console.log('Changed the view of the controller to be ', gridController1.getView());
+
             gridController1.setModel(gridModel1);
+            console.log('Changed the model of the controller to be ', gridController1.getModel());
+
             // We execute the addListeners after we set up the model
             gridController1.addListeners();
 
@@ -140,15 +167,24 @@
             WORKING WITH EVENTS
             ------------------------------------
             */
+            console.log('----------------------------------');
+            console.log('TESTING THE EVENTS');
+            console.log('----------------------------------');
 
+            console.log('Binding on the view\'s onTest event. The onTest function should be executed when it is triggered' );
             gridController1.getView().bind('onTest', onTest, gridController1);
+
+            console.log('Binding on the view\'s onTest event. The onTest2 function should be executed when it is triggered' );
             gridController1.getView().bind('onTest', onTest2, gridController1);
 
+            console.log('Dispatching the view\'s onTest event. Should get the onTest and onTest2 function executed');
             gridView1.trigger({type:'onTest'});
 
+            console.log('Unbinding the view from the onTest event');
             gridController1.getView().unbind('onTest', onTest, this);
             gridController1.getView().unbind('onTest', onTest2, this);
 
+            console.log('Dispatching the view\'s onTest event. The onTest and onTest2 functions should NOT be executed');
             gridView1.trigger({type:'onTest'});
 
             /*
@@ -157,20 +193,21 @@
             ------------------------------------
             */
 
+            console.log('----------------------------------');
+            console.log('TESTING THE PUBLISH / SUBSCRIBE');
+            console.log('----------------------------------');
+
+            console.log('Subscribing to the onApplicationReady message');
             gridController1.subscribe('onApplicationReady');
+
+            console.log('Publishing the onApplicationReady message. The onApplicationReadyMessage should be captured by the controller');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
+
+            console.log('Unsubscribing to the onApplicationReady message');
             gridController1.unsubscribe('onApplicationReady');
+
+            console.log('Publishing the onApplicationReady message. The onApplicationReadyMessage should NOT be captured by the controller');
             FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
-
-            /*
-            ------------------------------------
-            WORKING WITH A SERVICE
-            ------------------------------------
-            */
-
-            gridService1.url = 'data.json';
-            gridService1.dataType = 'json';
-            gridService1.fetch();
 
             /*
             ------------------------------------
@@ -180,8 +217,24 @@
             ------------------------------------
             */
 
+            console.log('----------------------------------');
+            console.log('TESTING THE CHANGES OF THE MODEL');
+            console.log('----------------------------------');
+            console.log('Changing the prop1 and prop2 properties. Only prop1 has a new value.');
             gridModel1.set({prop1: 'Property 11', prop2: 'Property 2'});
 
+            /*
+            ------------------------------------
+            WORKING WITH A SERVICE
+            ------------------------------------
+            */
+
+            console.log('----------------------------------');
+            console.log('TESTING THE SERVICE');
+            console.log('----------------------------------');
+            gridService1.url = 'data.json';
+            gridService1.dataType = 'json';
+            gridService1.fetch();
 
         </script>
     </body>
