@@ -72,7 +72,7 @@ gridController.setModel(gridModel);
 
 ```javascript
 // Listen for an event
-gridController.addEventListener(
+gridController.bind(
 	'onDataLoaded', 
 	onDataLoaded, 
 	this);
@@ -82,7 +82,7 @@ var onDataLoaded = function(event) {
 };
 
 // Dispatching events
-gridController.dispathEvent({
+gridController.trigger({
 	type: 'onDataLoaded',
 	params: {
 		somePropery: someValue,
@@ -92,7 +92,7 @@ gridController.dispathEvent({
 });
 
 // Removing event listeners
-gridController.removeEventListener(
+gridController.unbind(
 	'onDataLoaded', 
 	onDataLoaded, 
 	this);
