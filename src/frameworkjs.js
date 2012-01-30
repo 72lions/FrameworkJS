@@ -56,16 +56,22 @@ var FrameworkJS = (function(){
          *
          * @param  {String} id        The id of the class that we want to get
          * @param  {String} classType The class type of the object that we want to get
-         * @param  {[type]} type      The type of the base class. e.x. 'model', 'view', 'controller' or 'service'
          * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller || FrameworkJS.Service}
          * @author Thodoris Tsiridis
          */
-        retrieve: function (id, classType, type) {
+        retrieve: function (id, classType) {
 
             var className, id, model, controllerObj;
             var exists = -1;
 
-            className = classType || 'Generic.Controller';
+            // Check if the classType is not undefined
+            if (typeof classType !== 'undefined') {
+                className = classType;
+            } else {
+                console.log('FrameworkJS.retrieve: No class type was provided');
+                return null;
+            }
+
             id = id || ('_id_' + Math.floor(Math.random()*10000).toString());
 
             // Check if there is an array with objects of className type
