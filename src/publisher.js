@@ -97,4 +97,4 @@ FrameworkJS.Publisher = ( function() {
 
     }
 
-}) ();
+}());

@@ -8,32 +8,34 @@
  * @author Thodoris Tsiridis
  * @version 1.1
  */
-FrameworkJS.Utils = {
+FrameworkJS.Utils = (function(){
 
-    /**
-     * Checks if an object is an array
-     * @param  {Object}  object The object that will be checked
-     * @return {Boolean}
-     */
-    isArray : function(object) {
+    return {
+        /**
+         * Checks if an object is an array
+         * @param  {Object}  object The object that will be checked
+         * @return {Boolean}
+         */
+        isArray : function(object) {
 
-        var s = typeof object;
+            var s = typeof object;
 
-        if (s === 'object') {
-            if (object) {
-                if (object instanceof Array) {
-                    s = true;
+            if (s === 'object') {
+                if (object) {
+                    if (object instanceof Array) {
+                        s = true;
+                    } else {
+                        s = false;
+                    }
                 } else {
                     s = false;
                 }
             } else {
                 s = false;
             }
-        } else {
-            s = false;
+
+            return s;
         }
+    };
 
-        return s;
-    }
-
-};
+}());
