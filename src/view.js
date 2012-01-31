@@ -65,26 +65,6 @@ FrameworkJS.View = function() {
     this.hide = function() {};
 
     /**
-     * Sets the name of the view
-     *
-     * @param {String} name The name fo the view
-     * @author Thodoris Tsiridis
-     */
-    this.setName = function(name) {
-        this.name = name;
-    };
-
-    /**
-     * Sets the name of the view
-     *
-     * @param {String} name The name fo the view
-     * @author Thodoris Tsiridis
-     */
-    this.setId = function(id) {
-        this.id = id;
-    };
-
-    /**
      * Gets the model for the view
      *
      * @return {STL.Model.Base} The model
@@ -138,7 +118,7 @@ FrameworkJS.View = function() {
      */
     this.initialize = function(attributes) {
         if (typeof attributes !== 'undefined') {
-            this.setId(attributes.id);
+            this.id = attributes.id;
         }
     };
 
