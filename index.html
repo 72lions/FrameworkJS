@@ -132,33 +132,14 @@
                 </p>
                 <h2><a name="frameworkjscontrollerextending"></a>Extending a controller</h2>
                 <p>Extending a controller is really easy.</p>
-                <pre>
-
-FrameworkJS.extend(function() {
-
-    this.someFunction = function() {
-
-        // Some code here...
-
-    };
-
-}, FrameworkJS.Controller, 'Controller.Grid');
-                </pre>
+                <script src="https://gist.github.com/1710149.js?file=FrameworkJS.extend.controller.example.js"></script>
                 <p>The <code>FrameworkJS.extend</code> function takes three parameters. The first one is a function with the "class" structure, the second one is the base "class" and the last one is the "class" name. Since the "class" name is a string you can use something like <b>"namespace.classname"</b>.</p>
                 <h2><a name="frameworkjscontrollerinstantiating"></a>Instantiating a controller</h2>
-                <pre>
-var gridController = FrameworkJS.retrieve(
-    'SomeId',
-    'Controller.Grid');
-                </pre>
+                <script src="https://gist.github.com/1710200.js?file=frameworkjs.retrieve.instantiate.controller.example.js"></script>
                 <p><code>FrameworkJS.retrieve</code> takes three parameters. The first one is the unique id of the instance. The second parameter is the "class" name that we provided when we extended the base controller "class".</p>
                 <h2><a name="frameworkjscontrollerretrieving"></a>Get an instance of a controller</h2>
                 <p>We do the exact same thing that we did when we wanted to instantiate a controller but this time we give the id of a controller that already exists. </p>
-                <pre>
-var alreadyInstantiatedGridController = FrameworkJS.retrieve(
-    'SomeId',
-    'Controller.Grid');
-                </pre>
+                <script src="https://gist.github.com/1710220.js?file=frameworkjs.retrieve.instantiated.controller.example.js"></script>
                 <h1><a name="frameworkjsview"></a>FrameworkJS.View</h1>
                 <p>A view is responsible for manipulating the DOM and listening for DOM events. Any logic that has to do with DOM manipulation should exist inside a view. If a view needs to talk to a model or another controller or view then this has to happen through the view's controller.</p>
                 <h2>Public properties</h2>
