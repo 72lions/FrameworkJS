@@ -3,6 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>Testing FrameworkJS</title>
+
+        <script id="template1" type="text/html">
+            <li>
+                <a href="${url}">${title}</a>
+            </li>
+        </script>
+
+        <script id="template2" type="text/html" src="template.html"></script>
+
     </head>
     <body>
         <script type="text/javascript" src="../src/json2.js"></script>
@@ -238,6 +247,20 @@
             console.log('----------------------------------');
             console.log('Changing the prop1 and prop2 properties. Only prop1 has a new value.');
             gridModel1.set({prop1: 'Property 11', prop2: 'Property 2'});
+
+
+            /*
+            ------------------------------------
+            WORKING WITH TEMPLATES
+            ------------------------------------
+            */
+
+            console.log('----------------------------------');
+            console.log('WORKING WITH TEMPLATES');
+            console.log('----------------------------------');
+
+            console.log(FrameworkJS.Utils.tmpl('#template1', {url: 'http://in.gr', title: 'Title 1'}));
+            console.log(FrameworkJS.Utils.tmpl('<li><a href="${url}">${title}</a></li>', [{url: 'http://in.gr', title: 'Title 1'}, {url:'http://sl.se', title:'Title 2'}]));
 
             /*
             ------------------------------------
