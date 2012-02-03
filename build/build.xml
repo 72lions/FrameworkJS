@@ -23,6 +23,7 @@
 				json2.js
 				frameworkjs.js
 				publisher.js
+				router.js
 				ajax.js
 				service.js
 				utils.js
