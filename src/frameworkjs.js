@@ -61,7 +61,7 @@ var FrameworkJS = (function(){
          */
         retrieve: function (id, classType) {
 
-            var className, id, model, controllerObj;
+            var className, model, controllerObj;
             var exists = -1;
 
             // Check if the classType is not undefined

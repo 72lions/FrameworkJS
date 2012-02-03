@@ -197,11 +197,11 @@ FrameworkJS.Ajax = function(settings) {
                     }
 
                 }
-            }
+            };
 
             return xmlhttp;
         }
 
-    }
+    };
 
 };
