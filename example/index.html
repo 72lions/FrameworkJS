@@ -4,11 +4,7 @@
         <meta charset="UTF-8">
         <title>Testing FrameworkJS</title>
 
-        <script id="template1" type="text/html">
-            <li>
-                <a href="${url}">${title}</a>
-            </li>
-        </script>
+        <script id="template1" type="text/html"><li><a href="${url}">${title}</a></li></script>
 
         <script id="template2" type="text/html" src="template.html"></script>
 
@@ -259,8 +255,9 @@
             console.log('WORKING WITH TEMPLATES');
             console.log('----------------------------------');
 
-            console.log(FrameworkJS.Utils.tmpl('#template1', {url: 'http://in.gr', title: 'Title 1'}));
-            console.log(FrameworkJS.Utils.tmpl('<li><a href="${url}">${title}</a></li>', [{url: 'http://in.gr', title: 'Title 1'}, {url:'http://sl.se', title:'Title 2'}]));
+            console.log('Getting an inline template from inside a script', FrameworkJS.Utils.tmpl('#template1', {url: 'http://in.gr', title: 'Title 1'}));
+            console.log('Getting the template by loading the src of a script', FrameworkJS.Utils.tmpl('#template2', {url: 'http://in.gr', title: 'Title 1'}));
+            console.log('Getting the template from the tmpl function', FrameworkJS.Utils.tmpl('<li><a href="${url}">${title}</a></li>', [{url: 'http://in.gr', title: 'Title 1'}, {url:'http://sl.se', title:'Title 2'}]));
 
             /*
             ------------------------------------

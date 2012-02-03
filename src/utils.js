@@ -9,6 +9,11 @@
  * @version 1.1
  */
 FrameworkJS.Utils = (function(){
+    /**
+     * Stores all the templates that were loaded with an Ajax call so that they are not loaded again
+     * @type {Array}
+     */
+    var _cachedTemplates = {};
 
     /**
      * Parses the template
@@ -101,15 +106,37 @@ FrameworkJS.Utils = (function(){
          */
         tmpl: function (template, data) {
             var element, src;
+            // Check if the template is a string
             if (typeof template === 'string') {
+                // Check if the template is not an empty string
                 if (template.length) {
+                    // Check if the first template character is # which would mean that this is the id of an element
                     if (template[0] === '#') {
+                        // Get the element id without the #
                         element = document.getElementById(template.slice(1));
+                        // Check if the element is not null
                         if (element !== null){
                             src = element.getAttribute('src');
+                            // Check if the element has a src attribute. iIf it does then we'll make an ajax call
                             if (src !== null) {
-                                console.log('TODO: Need to get the template with an Ajax call', element);
+                                // Check the cache
+                                if (typeof _cachedTemplates[template] !== 'undefined') {
+                                    return parseTmpl.call(this, _cachedTemplates[template], data);
+                                } else {
+
+                                    var ajax = new FrameworkJS.Ajax({
+                                        method: 'GET',
+                                        dataType: 'text',
+                                        url: src,
+                                        async: false
+                                    }).execute();
+
+                                    _cachedTemplates[template] = ajax.responseText;
+                                    return parseTmpl.call(this, ajax.responseText, data);
+                                }
+
                             } else {
+                                // Get the innerHTML of the script as the template
                                 return parseTmpl.call(this, element.innerHTML, data);
                             }
                         } else {
