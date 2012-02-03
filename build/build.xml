@@ -55,13 +55,12 @@
     </target>
 
 	<target name="clean-js">
-		<delete>
-			<fileset dir="${dist.js.dir}" includes="**/*"/>
-		</delete>
+        		<delete dir="${dist.js.dir}" />
+        		<mkdir dir="${dist.js.dir}" />
 	</target>
 
 	<!-- run all tasks -->
-	<target name="main" depends="clean-js, compress-global-js">
+	<target name="main" depends="clean-js, merge-global-js">
     </target>
 
 </project>
