@@ -131,17 +131,18 @@ FrameworkJS.Controller = function() {
      * @param {Object} arguments.params The parameters that were sent from the notifier
      * @author Thodoris Tsiridis
      */
-    this.onNotify = function(arguments) {
+    this.onNotify = function(args) {
     };
 
     /**
      * Subscribes on specific messages
      *
      * @param  {String} message The message that will subscribe to
+     * @param {Number} priority The priority of the callback function
      * @author Thodoris Tsiridis
      */
-    this.subscribe = function(message) {
-        FrameworkJS.Publisher.subscribe(message, this);
+    this.subscribe = function(message, priority) {
+        FrameworkJS.Publisher.subscribe(message, this, priority);
     };
 
     /**

@@ -18,6 +18,18 @@ FrameworkJS.Publisher = ( function() {
      */
     var _subscribers = {};
 
+    /**
+     * Sorts an array based on the priority key
+     *
+     * @private
+     * @author Thodoris Tsiridis
+     */
+    var sortByPriority = function(a, b){
+        var x = parseInt(a.priority, 0);
+        var y = parseInt(b.priority, 0);
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    };
+
     return {
 
 
@@ -26,9 +38,13 @@ FrameworkJS.Publisher = ( function() {
          *
          * @param  {String} message    The message on which it will register the subscriber
          * @param  {Function} subscriber The subscriber
+         * @param {Number} priority The priority of the callback function
          * @author Thodoris Tsiridis
          */
-        subscribe: function(message, subscriber) {
+        subscribe: function(message, subscriber, priority) {
+            var alreadyRegistered = false, subscribers;
+
+            priority = priority || 0;
 
             if (typeof message !== 'undefined' && typeof subscriber !== 'undefined') {
 
@@ -36,8 +52,18 @@ FrameworkJS.Publisher = ( function() {
                     _subscribers[message] = [];
                 }
 
-                if (_subscribers[message].indexOf(subscriber) === -1) {
-                    _subscribers[message].push(subscriber);
+                subscribers = _subscribers[message];
+
+                for (var i = subscribers.length - 1; i >= 0; i--) {
+                    if (subscribers[i].subscriber === subscriber){
+                        alreadyRegistered = true;
+                        break;
+                    }
+                }
+
+                if (!alreadyRegistered) {
+                    _subscribers[message].push({subscriber: subscriber, priority: priority});
+                    _subscribers[message].sort(sortByPriority);
                 }
 
             } else {
@@ -53,11 +79,17 @@ FrameworkJS.Publisher = ( function() {
          * @author Thodoris Tsiridis
          */
         unsubscribe: function(message, subscriber) {
-            var index;
+            var index = -1, subscribers;
 
             if (typeof message !== 'undefined' && typeof subscriber !== 'undefined') {
                 if (typeof _subscribers[message] !== 'undefined') {
-                    index = _subscribers[message].indexOf(subscriber);
+                    subscribers = _subscribers[message];
+                    for (var i = subscribers.length - 1; i >= 0; i--) {
+                        if (subscribers[i].subscriber === subscriber){
+                            index = i;
+                            break;
+                        }
+                    }
                     if ( index !== -1) {
                         _subscribers[message].splice(index, 1);
                     }
@@ -83,18 +115,18 @@ FrameworkJS.Publisher = ( function() {
                 subscribers = _subscribers[message];
                 if (typeof subscribers !== 'undefined') {
                     for (var i = 0; i < subscribers.length; i++) {
-                        if (typeof subscribers[i].onNotify !== 'undefined') {
-                            subscribers[i].onNotify.call(subscribers[i], {message: message, params: args || {} });
+                        if (typeof subscribers[i].subscriber.onNotify !== 'undefined') {
+                            subscribers[i].subscriber.onNotify.call(subscribers[i].subscriber, {message: message, params: args || {} });
                         }
-                    };
+                    }
                 } else {
-                    console.log('Warning: FrameworkJS.Publisher.notify: There are no subscribers for that message');
+                    //console.log('Warning: FrameworkJS.Publisher.notify: There are no subscribers for that message');
                 }
             } else {
                 console.log('FrameworkJS.Publisher.notify: You must provide a message');
             }
         }
 
-    }
+    };
 
 }());

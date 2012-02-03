@@ -13,6 +13,7 @@
         <script type="text/javascript" src="../src/json2.js"></script>
         <script type="text/javascript" src="../src/frameworkjs.js"></script>
         <script type="text/javascript" src="../src/publisher.js"></script>
+        <script type="text/javascript" src="../src/router.js"></script>
         <script type="text/javascript" src="../src/ajax.js"></script>
         <script type="text/javascript" src="../src/service.js"></script>
         <script type="text/javascript" src="../src/utils.js"></script>
@@ -22,9 +23,9 @@
         <script type="text/javascript" src="../src/model.js"></script>
         <script type="text/javascript">
 
-            var  gridController1, subGridController1, gridView1, gridModel1, gridService1;
+            var  gridController1, subGridController1, gridView1, gridModel1, gridService1, gridHistory1;
             var onTest, onTest2;
-            var GridController, SubGridController, GridModel, GridView, GridService;
+            var GridController, SubGridController, GridModel, GridView, GridService, GridHistory;
 
             /*
             ------------------------------------
@@ -45,6 +46,10 @@
                     if(notification.message === 'onApplicationReady') {
                         console.log('The onApplicationReady message was captured by the controller', notification);
                     }
+
+                    if(notification.message === 'router:path:example/about') {
+                        console.log('Router send a path change event of the Grid Controller', notification);
+                    }
                 };
 
                 var onProperty1Changed = function (event) {
@@ -52,6 +57,25 @@
                 };
 
             }, FrameworkJS.Controller, 'Controller.Grid');
+
+
+            GridHistory = FrameworkJS.extend(function(){
+
+                this.onNotify = function (notification) {
+                    if(notification.message === 'router:pop') {
+                        console.log('Router send a pop event', notification);
+                    }
+
+                    if(notification.message === 'router:push') {
+                        console.log('Router send a push event', notification);
+                    }
+
+                    if(notification.message === 'router:path:example/about') {
+                        console.log('Router send a path change event of the Grid History', notification);
+                    }
+                }
+
+            }, FrameworkJS.Controller, 'Controller.History');
 
             /*
             ------------------------------------
@@ -160,6 +184,9 @@
             gridService1 = FrameworkJS.retrieve('GRIDSERVICE1', 'Service.Grid');
             console.log('The new Service.Grid instance with id:', gridService1.id, gridService1);
 
+            gridHistory1 = FrameworkJS.retrieve('GRIDHISTORY1', 'Controller.History');
+            console.log('The new Controller.History instance with id:', gridHistory1.id, gridHistory1);
+
             /*
             ------------------------------------
             SETTING UP A CONTROLLER AND RUNNING A CUSTOM
@@ -261,16 +288,41 @@
 
             /*
             ------------------------------------
-            WORKING WITH A SERVICE
+            WORKING WITH THE HISTORY API
             ------------------------------------
             */
 
             console.log('----------------------------------');
-            console.log('TESTING THE SERVICE');
+            console.log('TESTING THE HISTORY API');
             console.log('----------------------------------');
-            gridService1.url = 'data.json';
-            gridService1.dataType = 'json';
-            gridService1.fetch();
+
+
+            console.log('Subscribing to the router:pop and router:push messages');
+            gridController1.subscribe('router:path:example/about', 2);
+            gridHistory1.subscribe('router:push');
+            gridHistory1.subscribe('router:path:example/about', 3);
+
+            FrameworkJS.Router.setBasePath('/example');
+            FrameworkJS.Router.push(null, 'Some title', '/about');
+
+            /*
+            ------------------------------------
+            WORKING WITH A SERVICE
+            ------------------------------------
+            */
+
+
+            setTimeout(function(){
+
+                console.log('----------------------------------');
+                console.log('TESTING THE SERVICE WITH A DELAY OF 1 SECOND');
+                console.log('----------------------------------');
+
+                gridService1.url = 'data.json';
+                gridService1.dataType = 'json';
+                gridService1.fetch();
+
+            }, 1000);
 
         </script>
     </body>
