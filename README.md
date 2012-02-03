@@ -8,15 +8,13 @@ Another MVC framework for Javascript. FrameworkJS has built in support for Model
 In the following examples the first parameter is the class that you want to extend, the second parameter is the base class that you want to use for extending and the last one is the namespace.classname of the new class/function
 
 ```javascript
-var GridController, SubGridController, GridModel, GridView, GridService, GridHistory;
-
 /*
 ------------------------------------
 EXTENDING THE BASE CONTROLLER CLASS
 ------------------------------------
 */
 
-GridController =  FrameworkJS.extend(function() {
+FrameworkJS.extend(function() {
     // Overwritting the properties
     this.name = 'GridController';
 
@@ -47,7 +45,7 @@ GridController =  FrameworkJS.extend(function() {
 EXTENDING THE CONTROLLER
 ------------------------------------
 */
-GridHistory = FrameworkJS.extend(function(){
+FrameworkJS.extend(function(){
 
 	// Overwrite the onNotify function
     this.onNotify = function (notification) {
@@ -73,7 +71,7 @@ EXTENDING A CUSTOM CLASS
 */
 
 // Extending a custom class
-SubGridController =  FrameworkJS.extend(function() {
+FrameworkJS.extend(function() {
     // Overwritting the properties
     this.name = 'SubGridController';
 
@@ -85,7 +83,7 @@ EXTENDING THE BASE MODEL CLASS
 ------------------------------------
 */
 
-GridModel =  FrameworkJS.extend(function() {
+FrameworkJS.extend(function() {
     // Overwritting the properties
     this.name = 'GridModel';
     this.data = {title: "MyTitle", prop1: 'Property 1'};
@@ -98,7 +96,7 @@ EXTENDING THE BASE VIEW CLASS
 ------------------------------------
 */
 
-GridView = FrameworkJS.extend(function () {
+FrameworkJS.extend(function () {
     // Overwritting the properties
     this.name = 'GridView';
     this.domElement = '.test';
@@ -117,7 +115,7 @@ EXTENDING THE BASE SERVICE CLASS
 ------------------------------------
 */
 
-GridService = FrameworkJS.extend(function() {
+FrameworkJS.extend(function() {
     // Overwriting the onSuccess function
     this.onSuccess = function(result, request) {
         console.log('The service made an ajax call', result, request, this);
