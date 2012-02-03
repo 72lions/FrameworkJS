@@ -64,7 +64,7 @@ FrameworkJS.Ajax = function(settings) {
      * @type Boolean
      * @default true
      */
-    _settings.async = settings.async || true;
+    _settings.async = typeof settings.async !== 'undefined' ? settings.async : true;
 
     /**
      * The method that will be called on success
@@ -198,6 +198,8 @@ FrameworkJS.Ajax = function(settings) {
 
                 }
             }
+
+            return xmlhttp;
         }
 
     }
