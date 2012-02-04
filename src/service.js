@@ -93,4 +93,14 @@ FrameworkJS.Service = function() {
         console.log('error', error);
     };
 
+    /**
+     * Returns a Model, View or Controller based on the class type and id. If there is no object initialized with that id and class type then one is created
+     *
+     * @param  {String} id        The id of the class that we want to get
+     * @param  {String} classType The class type of the object that we want to get
+     * @return {FrameworkJS.Model || FrameworkJS.View || FrameworkJS.Controller || FrameworkJS.Service}
+     * @author Thodoris Tsiridis
+     */
+    this.retrieve = FrameworkJS.retrieve;
+
 };
