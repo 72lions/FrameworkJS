@@ -143,7 +143,7 @@ subGridController1 = FrameworkJS.retrieve('GRIDSUBCONTROLLER1', 'SubController.G
 // Instantiate a Controller.History
 gridHistory1 = FrameworkJS.retrieve('GRIDHISTORY1', 'Controller.History');
 ```
-If the controller of "class" Controller.Grid with id 'SomeId' doesn't exist then it will create one else it will return the already existing one.
+If the controller of "class" Controller.Grid with id 'GRIDCONTROLLER1' doesn't exist then it will create one else it will return the already existing one.
 
 **Basic controller setup**
 
@@ -197,13 +197,13 @@ gridView1.trigger({type:'onTest'});
 
 ```javascript
 // Subscribe example. Subscribe on the 'onApplicationReady' message
-gridController.subscribe('onApplicationReady');
+gridController1.subscribe('onApplicationReady');
 
 // Send a notification
 FrameworkJS.Publisher.notify('onApplicationReady', {test: 'applicationReady'});
 
 // Unsubscribe from all the 'onApplicationReady' notifications
-gridController.unsubscribe('onApplicationReady');
+gridController1.unsubscribe('onApplicationReady');
 ```
 
 **Listen to change event of the model's properties**
