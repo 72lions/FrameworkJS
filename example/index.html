@@ -270,7 +270,8 @@
             console.log('----------------------------------');
             console.log('Changing the prop1 and prop2 properties. Only prop1 has a new value.');
             gridModel1.set({prop1: 'Property 11', prop2: 'Property 2'});
-
+            console.log('Changing the prop1 property but with the silent flag set to true. No change should be triggered');
+            gridModel1.set({prop1: 'Property 111', prop2: 'Property 2'}, true);
 
             /*
             ------------------------------------

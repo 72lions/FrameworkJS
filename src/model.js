@@ -39,11 +39,14 @@ FrameworkJS.Model = function(){
      * Saves values to a specific key of the model
      *
      * @param {Object} properties The properties to change
+     * @param {Boolean} silent Set to true if you want the no change events to be triggered
      * @author Thodoris Tsiridis
      */
-    this.set = function(properties) {
+    this.set = function(properties, silent) {
         var changed;
         var changedProperties;
+
+        silent = silent || false;
 
         for(key in properties){
 
@@ -65,12 +68,16 @@ FrameworkJS.Model = function(){
                 if( typeof changedProperties === 'undefined') {
                     changedProperties = {};
                 }
-                this.trigger({type: 'change:' + key, value: properties[key]});
+
+                if (!silent) {
+                    this.trigger({type: 'change:' + key, value: properties[key]});
+                }
+
                 changedProperties[key] = properties[key];
             }
         }
 
-        if( typeof changedProperties !== 'undefined') {
+        if( typeof changedProperties !== 'undefined' && !silent) {
             this.trigger({type: 'change', value: changedProperties});
         }
 
