@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 20px;
+        }
+
+        button {
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -o-border-radius: 2px;
+            border-radius: 2px;
+
+            background-color: #f3f3f3;
+            border: 1px solid #D4D4D4;
+            cursor:pointer;
+            padding: 3px 5px 3px 5px;
+            color: white;
+            font-size:12px;
+            text-decoration: none;
+            text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+            border-color: #518CC6;
+            border-bottom-color: #2A65A0;
+            background: -webkit-linear-gradient(#599BDC,#3072B3);
+            background: -moz-linear-gradient(#599BDC,#3072B3);
+            background: -webkit-linear-gradient(#599BDC,#3072B3);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bdc',endColorstr='#3072b3')";
+        }
+
+        button:active {
+            background: -webkit-linear-gradient(#3072B3,#599BDC);
+            background: -moz-linear-gradient(#3072B3,#599BDC);
+            background: -webkit-linear-gradient(#3072B3,#599BDC);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3072B3',endColorstr='#599BDC')";
+        }
+
+        textarea {
+            display: block;
+            margin-top: 20px;
+
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -o-border-radius: 2px;
+            border-radius: 2px;
+
+            border: 1px solid #f3f3f3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <button id="btnLoad">Load</button>
+    <textarea name="resutl" id="result" cols="30" rows="10"></textarea>
+
+    <script type="text/javascript" src="../src/json2.js"></script>
+    <script type="text/javascript" src="../src/frameworkjs.js"></script>
+    <script type="text/javascript" src="../src/publisher.js"></script>
+    <script type="text/javascript" src="../src/router.js"></script>
+    <script type="text/javascript" src="../src/ajax.js"></script>
+    <script type="text/javascript" src="../src/service.js"></script>
+    <script type="text/javascript" src="../src/utils.js"></script>
+    <script type="text/javascript" src="../src/eventtarget.js"></script>
+    <script type="text/javascript" src="../src/controller.js"></script>
+    <script type="text/javascript" src="../src/view.js"></script>
+    <script type="text/javascript" src="../src/model.js"></script>
+    <script type="text/javascript">
+        // Getting the button
+        var btnLoad = document.getElementById('btnLoad');
+        var service;
+
+        // Creating a class that extends the Service and overwrites the onSuccess function.
+        // The class new name will be 'Service.Example'
+        FrameworkJS.extend(function() {
+            // Overwriting the onSuccess function
+            this.onSuccess = function(result, request) {
+                document.getElementById('result').innerHTML = result;
+            };
+
+            this.onError = function(error){
+
+            };
+        }, FrameworkJS.Service, 'Service.Example');
+
+        // Instantiate a new Service.Example class with a unique id
+        service = FrameworkJS.retrieve('service1233847', 'Service.Example');
+
+        // Setting up the service
+        service.url = 'data.json';
+        service.method = 'GET';
+        service.data = 'name=some+name&age=21';
+        service.dataType = 'json';
+
+        // Set what will happend when the user clicks on the button.
+        btnLoad.onclick = function() {
+            service.fetch();
+        }
+
+    </script>
+</body>
+</html>

@@ -81,7 +81,7 @@ FrameworkJS.Service = function() {
      * @author Thodoris Tsiridis
      */
     this.onSuccess = function(result, request) {
-        console.log('success', result, request, this);
+
     };
 
     /**
@@ -90,7 +90,7 @@ FrameworkJS.Service = function() {
      * @author Thodoris Tsiridis
      */
     this.onError = function(error) {
-        console.log('error', error);
+
     };
 
     /**
