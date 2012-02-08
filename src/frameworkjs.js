@@ -31,6 +31,7 @@ var FrameworkJS = (function(){
                 if (typeof what.prototype !== 'undefined') {
                     if (typeof withWhat === 'function') {
                         what.prototype = new withWhat();
+                        what.prototype.constructor = what;
                         if (typeof _types[classType] === 'undefined'){
                             _types[classType] = what;
                         } else {

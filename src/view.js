@@ -112,14 +112,9 @@ FrameworkJS.View = function() {
     /**
      * Initializes the view
      *
-     * @param {Object} attributes The attributes that will be used to initialize the class
-     * @param {String} attributes.id The unique id for this class
      * @author Thodoris Tsiridis
      */
-    this.initialize = function(attributes) {
-        if (typeof attributes !== 'undefined') {
-            this.id = attributes.id;
-        }
+    this.initialize = function() {
     };
 
 };
