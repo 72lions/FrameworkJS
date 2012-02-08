@@ -10,6 +10,8 @@
  */
 FrameworkJS.Ajax = function(settings) {
 
+    settings = settings || {};
+
     /**
      * The object that holds all the settings
      *
@@ -18,8 +20,6 @@ FrameworkJS.Ajax = function(settings) {
      * @default {}
      */
     var _settings = {};
-
-    settings = settings || {};
 
     /**
      * The method type

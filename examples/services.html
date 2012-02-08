@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+    <style type="text/css">
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: Georgia;
+            font-size: 14px;
+            color: #333;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        button {
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -o-border-radius: 2px;
+            border-radius: 2px;
+            font-family: Arial;
+
+            background-color: #f3f3f3;
+            border: 1px solid #D4D4D4;
+            cursor:pointer;
+            padding: 3px 5px 3px 5px;
+            color: white;
+            font-size:12px;
+            text-decoration: none;
+            text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+            border-color: #518CC6;
+            border-bottom-color: #2A65A0;
+            background: -webkit-linear-gradient(#599BDC,#3072B3);
+            background: -moz-linear-gradient(#599BDC,#3072B3);
+            background: -webkit-linear-gradient(#599BDC,#3072B3);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bdc',endColorstr='#3072b3')";
+        }
+
+        button:active {
+            background: -webkit-linear-gradient(#3072B3,#599BDC);
+            background: -moz-linear-gradient(#3072B3,#599BDC);
+            background: -webkit-linear-gradient(#3072B3,#599BDC);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3072B3',endColorstr='#599BDC')";
+        }
+
+        textarea {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 80%;
+            height: 200px;
+
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -o-border-radius: 2px;
+            border-radius: 2px;
+
+            border: 1px solid #f3f3f3;
+        }
+
+        #resultHTML {
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -o-border-radius: 2px;
+            border-radius: 2px;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            border: 1px solid #f3f3f3;
+        }
+
+        h1, p {
+            margin: 0px;
+            padding: 0px 0px 10px 0px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Services</h1>
+    <p>A service is your gateway to external data.</p>
+    <button id="btnLoadJSON">Load JSON data</button>
+    <textarea name="resultJSON" id="resultJSON"></textarea>
+
+    <button id="btnLoadHTML">Load HTML markup</button>
+    <div name="resutHTML" id="resultHTML"></textarea>
+
+    <script type="text/javascript" src="../dist/frameworkjs.merged.js"></script>
+    <script type="text/javascript">
+        /*
+         *----------------------------------------------------
+         * LOADING JSON DATA
+         *----------------------------------------------------
+         */
+        // Getting the button
+        var btnLoadJSON = document.getElementById('btnLoadJSON');
+        var serviceJSON;
+
+        // Creating a class that extends the Service and overwrites the onSuccess function.
+        // The class new namespace.name will be service.JSONExample
+        FrameworkJS.extend(function() {
+            // Overwriting the onSuccess function
+            this.onSuccess = function(result, request) {
+                document.getElementById('resultJSON').innerHTML = JSON.stringify(result);
+            };
+
+            // Overwritting the onError function
+            this.onError = function(error){
+
+            };
+        }, FrameworkJS.Service, 'service.JSONExample');
+
+        // Instantiate a new service.JSONExample class with a unique id
+        serviceJSON = FrameworkJS.retrieve('service1233847', 'service.JSONExample');
+
+        // Setting up the service
+        serviceJSON.url = 'data/data.json';
+        serviceJSON.method = 'GET';
+        serviceJSON.data = 'name=some+name&age=21';
+        serviceJSON.async = true;
+        serviceJSON.dataType = 'json';
+
+        // Set what will happend when the user clicks on the button.
+        btnLoadJSON.onclick = function() {
+            // Use the service to fetch the data
+            serviceJSON.fetch();
+        }
+
+        /*
+         *----------------------------------------------------
+         * LOADING HTML DATA
+         *----------------------------------------------------
+         */
+
+        // Getting the button
+        var btnLoadHTML = document.getElementById('btnLoadHTML');
+        var serviceHTML;
+
+        // Creating a class that extends the Service and overwrites the onSuccess function.
+        // The class new namespace.name will be service.HTMLExample
+        FrameworkJS.extend(function() {
+            // Overwriting the onSuccess function
+            this.onSuccess = function(result, request) {
+                document.getElementById('resultHTML').innerHTML = result;
+            };
+
+            // Overwritting the onError function
+            this.onError = function(error){
+
+            };
+        }, FrameworkJS.Service, 'service.HTMLExample');
+
+        // Instantiate a new service.HTMLExample class with a unique id
+        serviceHTML = FrameworkJS.retrieve('service841', 'service.HTMLExample');
+
+        // Setting up the service
+        serviceHTML.url = 'data/markup.html';
+        serviceHTML.method = 'GET';
+        serviceHTML.data = 'name=some+name&age=21';
+        serviceHTML.async = true;
+        serviceHTML.dataType = 'text';
+
+        // Set what will happend when the user clicks on the button.
+        btnLoadHTML.onclick = function() {
+            // Use the service to fetch the data
+            serviceHTML.fetch();
+        }
+    </script>
+</body>
+</html>
