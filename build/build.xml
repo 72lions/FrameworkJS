@@ -20,7 +20,6 @@
 	<target name="merge-global-js">
 		<concat destfile="${dist.merged.file.js}" fixlastline="yes" append="no">
 			<filelist dir="${src.js.dir}" files="
-				json2.js
 				frameworkjs.js
 				publisher.js
 				router.js
@@ -45,13 +44,13 @@
 
 	<!-- Compress the merged common javascript file -->
 	<target name="compress-global-js" depends="clean-merged-js">
-		<echo>${dist.merged.file.js} to ${dist.compressed.file.js}</echo>
+		<echo>Compressing to ${dist.merged.file.js}</echo>
 		<java jar="${compressor.dir}" fork="true">
 			<arg value="${dist.merged.file.js}"/>
 			 <arg line="--line-break"/>
 		  <arg line="4000"/>
 			<arg value="-o"/>
-			<arg value="${dist.compressed.file.js}"/>
+			<arg value="${dist.merged.file.js}"/>
 		</java>
     </target>
 
@@ -60,8 +59,13 @@
         		<mkdir dir="${dist.js.dir}" />
 	</target>
 
+	<target name="copy-files">
+		<copy todir="${dist.js.dir}" file="${src.js.dir}/json2.js">
+		</copy>
+	</target>
+
 	<!-- run all tasks -->
-	<target name="main" depends="clean-js, merge-global-js">
+	<target name="main" depends="clean-js, compress-global-js, copy-files">
     </target>
 
 </project>

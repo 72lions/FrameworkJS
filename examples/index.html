@@ -6,10 +6,11 @@
 
         <script id="template1" type="text/html"><li><a href="${url}">${title}</a></li></script>
 
-        <script id="template2" type="text/html" src="template.html"></script>
+        <script id="template2" type="text/html" src="/examples/templates/template.html"></script>
 
     </head>
     <body>
+        <script type="text/javascript" src="../dist/json2.js"></script>
         <script type="text/javascript" src="../dist/frameworkjs.merged.js"></script>
         <script type="text/javascript">
 
@@ -291,9 +292,9 @@
             console.log('Subscribing to the router:pop and router:push messages');
             gridController1.subscribe('router:path:example/about', 2);
             gridHistory1.subscribe('router:push');
-            gridHistory1.subscribe('router:path:example/about', 3);
+            gridHistory1.subscribe('router:path:examples/about', 3);
 
-            FrameworkJS.Router.setBasePath('/example');
+            FrameworkJS.Router.setBasePath('/examples');
             FrameworkJS.Router.push(null, 'Some title', '/about');
 
             /*
@@ -309,7 +310,7 @@
                 console.log('TESTING THE SERVICE WITH A DELAY OF 1 SECOND');
                 console.log('----------------------------------');
 
-                gridService1.url = 'data.json';
+                gridService1.url = '/examples/data/data.json';
                 gridService1.dataType = 'json';
                 gridService1.fetch();
 

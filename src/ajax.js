@@ -170,7 +170,7 @@ FrameworkJS.Ajax = function(settings) {
             xmlhttp.onreadystatechange = function() {
                 var response;
 
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 
                     if (typeof _settings.success !== 'undefined') {
 
