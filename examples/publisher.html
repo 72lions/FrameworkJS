@@ -2,21 +2,21 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Services</title>
+    <title>Publisher / Subscriber</title>
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css" media="screen">
 </head>
 <body>
-    <h1>Services</h1>
-    <p>A service is your gateway to external data.</p>
-    <button id="btnLoadJSON">Load JSON data</button>
-    <span id="message"></span>
-    <textarea name="resultJSON" id="resultJSON"></textarea>
 
-    <button id="btnLoadHTML">Load HTML markup</button>
+    <h1>Publisher / Subscriber</h1>
+
+    <button id="broadcastPageLoaded">Broadcast "pageLoaded" message</button>
+    <button id="broadcastPageUnloaded">Broadcast "pageUnloaded" message</button>
+    <button id="broadcastMenuClicked">Broadcast "menuClicked" message</button>
+
     <div name="resutHTML" id="resultHTML"></textarea>
 
     <script type="text/javascript" src="../dist/json2.js"></script>
     <script type="text/javascript" src="../dist/frameworkjs.merged.js"></script>
-    <script type="text/javascript" src="js/services.js"></script>
+    <script type="text/javascript" src="js/publisher.js"></script>
 </body>
 </html>
