@@ -89,6 +89,20 @@
                 <p>FrameworkJS is depended only on Douglas Crockford's <a href="https://github.com/douglascrockford/JSON-js" target="_blank">JSON</a> utility. The framework includes the library so you don't have to downloaded yourself.</p>
                 <h1><a name="frameworkjscontroller"></a>FrameworkJS.Controller</h1>
                 <p>A controller is responsible for talking to a view and a model and also passing data from the model to the view. A view cannot talk to a model and a model can't talk to a view.</p>
+                <h2>Private properites</h2>
+                <p>
+                    <b>_view</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller's view.
+                </p>
+                <p>
+                    <b>_model</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller's model.
+                </p>
+                <h2>Public properties</h2>
+                <p>
+                    <b>name</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The name of the controller.
+                </p>
+                <p>
+                    <b>id</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The id of the controller.
+                </p>
                 <h2>Public methods</h2>
                 <p>
                     <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.initialize([atrributes])<br/>
@@ -129,6 +143,10 @@
                 <p>
                     <b>unsubscribe</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.unsubscribe(message)<br/>
                     Unsubscribes from a specific message. The <b>message</b> parameter is a string.
+                </p>
+                <p>
+                    <b>retrieve</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.retrieve(id, classType)<br/>
+                    Retrieves an instance of a class. The <b>id</b> parameter is a string and it's the id of the class that we want to retrieve. The <b>classType</b> parameter is a string and its the class type of the instance that we need. If an instance with that type and id exists then thatn one will be return, else it will insantiate a new one.
                 </p>
                 <h2><a name="frameworkjscontrollerextending"></a>Extending a controller</h2>
                 <p>Extending a controller is really easy.</p>
@@ -179,6 +197,14 @@
                 <p>
                     <b>getController</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getController()<br/>
                     Returns the view's controller. The <b>controller</b> that is returned is a <b><a href="#frameworkjscontroller">FrameworkJS.Controller</a></b> or an object that extends the <b><a href="#frameworkjscontroller">FrameworkJS.Controller</a></b> object.
+                </p>
+                <p>
+                    <b>getDOMElement</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getDOMElement()<br/>
+                    Returns the view's DOM Element.
+                </p>
+                <p>
+                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.initialize()<br/>
+                    Initializes the view
                 </p>
             </div>
         </div>
