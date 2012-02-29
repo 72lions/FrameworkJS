@@ -15,7 +15,7 @@ h1, h2 {
     font-family: 'Oswald';
     font-size: 28px;
     font-weight: normal;
-    color: #666;
+    color: #000;
 }
 
 h2 {
@@ -26,17 +26,16 @@ a:link,
 a:visited {
     color: #F02311;
     text-decoration: none;
-    border-bottom: 1px dotted transparent;
     -webkit-transition: border-bottom .2s;
     -moz-transition: border-bottom .2s;
     -o-transition: border-bottom .2s;
     transition: border-bottom .2s;
     text-shadow: 0 1px white;
-
+    border-bottom: 1px dotted #F02311;
 }
 
 a:hover {
-    border-bottom: 1px dotted #F02311;
+
 }
 
 header #logo {
@@ -86,6 +85,10 @@ section.main .sidebar {
     width: 200px;
     padding: 20px;
 
+}
+
+b {
+    color: #F02311;
 }
 
 section.main .sidebar nav > ul {
@@ -138,5 +141,5 @@ section.main code {
 
 section.main .contents .content p {
     line-height: 25px;
-    margin: 20px 0px 20px 0px;
+    margin: 0px 0px 20px 0px;
 }

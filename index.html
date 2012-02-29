@@ -33,19 +33,19 @@
                     </li>
 
                     <li>
-                        <a href="#frameworkjsviews">Views</a>
+                        <a href="#frameworkjsview">Views</a>
                         <ul>
-                            <li>- <a href="#">Extending a view</a></li>
-                            <li>- <a href="#">Instantiating a view</a></li>
-                            <li>- <a href="#">Get an instance of a view</a></li>
+                            <li>- <a href="#frameworkjsviewsextending">Extending a view</a></li>
+                            <li>- <a href="#frameworkjsviewsinstantiating">Instantiating a view</a></li>
+                            <li>- <a href="#frameworkjsviewsretrieving">Get an instance of a view</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Models</a>
+                        <a href="#frameworkjsmodel">Models</a>
                         <ul>
-                            <li>- <a href="#">Extending a model</a></li>
-                            <li>- <a href="#">Instantiating a model</a></li>
-                            <li>- <a href="#">Get an instance of a model</a></li>
+                            <li>- <a href="#frameworkjsmodelextending">Extending a model</a></li>
+                            <li>- <a href="#frameworkjsmodelinstantiating">Instantiating a model</a></li>
+                            <li>- <a href="#frameworkjsmodelretrieving">Get an instance of a model</a></li>
                         </ul>
                     </li>
                     <li>
@@ -89,13 +89,17 @@
                 <p>FrameworkJS is depended only on Douglas Crockford's <a href="https://github.com/douglascrockford/JSON-js" target="_blank">JSON</a> utility. The framework includes the library so you don't have to downloaded yourself.</p>
                 <h1><a name="frameworkjscontroller"></a>FrameworkJS.Controller</h1>
                 <p>A controller is responsible for talking to a view and a model and also passing data from the model to the view. A view cannot talk to a model and a model can't talk to a view.</p>
+
+
                 <h2>Private properites</h2>
                 <p>
-                    <b>_view</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller's view.
+                    <b>_view</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller's view. <a href="#frameworkjsview">FrameworkJS.View</a>
                 </p>
                 <p>
-                    <b>_model</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller's model.
+                    <b>_model</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller's model. <a href="#frameworkjsmodel">FrameworkJS.Model</a>
                 </p>
+
+
                 <h2>Public properties</h2>
                 <p>
                     <b>name</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The name of the controller.
@@ -103,63 +107,81 @@
                 <p>
                     <b>id</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The id of the controller.
                 </p>
+
+
                 <h2>Public methods</h2>
                 <p>
-                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.initialize([atrributes])<br/>
+                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.initialize([atrributes])</code><br/>
                     Responsible for initializing the controller. The <b>attributes</b> parameter is an <b>object</b>.
                 </p>
                 <p>
-                    <b>postInitialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.postInitialize()<br/>
+                    <b>postInitialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.postInitialize()</code><br/>
                     This function is executed automatically after the initialize function of the object is executed. Any logic after the initialization should go here.
                 </p>
                 <p>
-                    <b>setView</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.setView(view)<br/>
+                    <b>setView</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.setView(view)</code><br/>
                     Sets the view of the controller. The <b>view</b> parameter should be a <b><a href="#frameworkjsview">FrameworkJS.View</a></b> or an object that extends the <b><a href="#frameworkjsview">FrameworkJS.View</a></b> object.
                 </p>
                 <p>
-                    <b>getView</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getView()<br/>
+                    <b>getView</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.getView()</code><br/>
                     Returns the view of the controller. The <b>view</b> that is returned is a <b><a href="#frameworkjsview">FrameworkJS.View</a></b> or an object that extends the <b><a href="#frameworkjsview">FrameworkJS.View</a></b> object.
                 </p>
                 <p>
-                    <b>setModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.setModel(model)<br/>
+                    <b>setModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.setModel(model)</code><br/>
                     Sets the model of the controller. The <b>model</b> parameter should be a <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> or an object that extends the <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> object.
                 </p>
                 <p>
-                    <b>getModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getModel()<br/>
+                    <b>getModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.getModel()</code><br/>
                     Returns the model of the controller. The <b>model</b> that is returned is a <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> or an object that extends the <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> object.
                 </p>
                 <p>
-                    <b>onModelChange</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.onModelChange(event)<br/>
+                    <b>onModelChange</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.onModelChange(event)</code><br/>
                     Triggered when a property of a model is changed. The event is an <b>object</b> with two keys: <b>type</b> and <b>value</b>.
                 </p>
                 <p>
-                    <b>onNotify</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.onNotify(arguments)<br/>
+                    <b>onNotify</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.onNotify(arguments)</code><br/>
                     Triggered when a message that the controller is listening to is published by the <b><a href="#frameworkjspublisher">FrameworkJS.Publisher</a></b>. The arguments parameter is an <b>object</b> with two keys: <b>message</b> and <b>params</b>.
                 </p>
-                <p>
-                    <b>subscribe</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.subscribe(message)<br/>
-                    Subscribes to a specific message. The <b>message</b> parameter is a string.
+                <p></code>
+                    <b>subscribe</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.subscribe(message)</code><br/>
+                    Subscribes to a specific message. The <b>message</b> parameter is a <b>string</b>.
                 </p>
                 <p>
-                    <b>unsubscribe</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.unsubscribe(message)<br/>
-                    Unsubscribes from a specific message. The <b>message</b> parameter is a string.
+                    <b>unsubscribe</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.unsubscribe(message)</code><br/>
+                    Unsubscribes from a specific message. The <b>message</b> parameter is a <b>string</b>.
                 </p>
                 <p>
-                    <b>retrieve</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.retrieve(id, classType)<br/>
-                    Retrieves an instance of a class. The <b>id</b> parameter is a string and it's the id of the class that we want to retrieve. The <b>classType</b> parameter is a string and its the class type of the instance that we need. If an instance with that type and id exists then thatn one will be return, else it will insantiate a new one.
+                    <b>retrieve</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.retrieve(id, classType)</code><br/>
+                    Retrieves an instance of a class. The <b>id</b> parameter is a string and it's the id of the class that we want to retrieve. The <b>classType</b> parameter is a <b>string</b> and its the class type of the instance that we need. If an instance with that type and id exists then that one will be returned, else it will insantiate a new one.
                 </p>
+
+
+
+
                 <h2><a name="frameworkjscontrollerextending"></a>Extending a controller</h2>
-                <p>Extending a controller is really easy.</p>
                 <script src="https://gist.github.com/1710149.js?file=FrameworkJS.extend.controller.example.js"></script>
                 <p>The <code>FrameworkJS.extend</code> function takes three parameters. The first one is a function with the "class" structure, the second one is the base "class" and the last one is the "class" name. Since the "class" name is a string you can use something like <b>"namespace.classname"</b>.</p>
                 <h2><a name="frameworkjscontrollerinstantiating"></a>Instantiating a controller</h2>
                 <script src="https://gist.github.com/1710200.js?file=frameworkjs.retrieve.instantiate.controller.example.js"></script>
                 <p><code>FrameworkJS.retrieve</code> takes three parameters. The first one is the unique id of the instance. The second parameter is the "class" name that we provided when we extended the base controller "class".</p>
                 <h2><a name="frameworkjscontrollerretrieving"></a>Get an instance of a controller</h2>
-                <p>We do the exact same thing that we did when we wanted to instantiate a controller but this time we give the id of a controller that already exists. </p>
                 <script src="https://gist.github.com/1710220.js?file=frameworkjs.retrieve.instantiated.controller.example.js"></script>
+
+
+
+
+
                 <h1><a name="frameworkjsview"></a>FrameworkJS.View</h1>
                 <p>A view is responsible for manipulating the DOM and listening for DOM events. Any logic that has to do with DOM manipulation should exist inside a view. If a view needs to talk to a model or another controller or view then this has to happen through the view's controller.</p>
+
+                <h2>Private properties</h2>
+                <p>
+                    <b>_controller</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The controller that the view belongs to. <a href="#frameworkjscontroller">FrameworkJS.Controller</a>
+                </p>
+                <p>
+                    <b>_domElement</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The view's main DOM element.
+                </p>
+
                 <h2>Public properties</h2>
                 <p>
                     <b>name</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The name of the view.
@@ -170,42 +192,83 @@
                 <p>
                     <b>title</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title of the view.
                 </p>
-                <p>
-                    <b>domElement</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The view's main DOM element.
-                </p>
+
                 <h2>Public methods</h2>
                 <p>
-                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.initialize([atrributes])<br/>
+                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.initialize([atrributes])</code><br/>
                     Responsible for initializing the view. The <b>attributes</b> parameter is an <b>object</b>.
                 </p>
                 <p>
-                    <b>show</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.show()<br/>
+                    <b>show</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.show()</code><br/>
                     May be used for showing the view.
                 </p>
                 <p>
-                    <b>hide</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.hide()<br/>
+                    <b>hide</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.hide()</code><br/>
                     May be used for hiding the view.
                 </p>
                 <p>
-                    <b>setModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.setModel(model)<br/>
-                    Sets the model of the view's controller by talking to the controller. The <b>model</b> parameter should be a <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> or an object that extends the <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> object.
-                </p>
-                <p>
-                    <b>getModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getModel()<br/>
+                    <b>getModel</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.getModel()</code><br/>
                     Returns the model of the view's controller by talking to the controller. The <b>model</b> that is returned is a <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> or an object that extends the <b><a href="#frameworkjsmodel">FrameworkJS.Model</a></b> object.
                 </p>
                 <p>
-                    <b>getController</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getController()<br/>
+                    <b>setController</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.setController(controller)</code><br/>
+                    Sets the view's controller. The <b>controller</b> paramater is a <b><a href="#frameworkjscontroller">FrameworkJS.Controller</a></b> or an object that extends the <b><a href="#frameworkjscontroller">FrameworkJS.Controller</a></b> object.
+                </p>
+                <p>
+                    <b>getController</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.getController()</code><br/>
                     Returns the view's controller. The <b>controller</b> that is returned is a <b><a href="#frameworkjscontroller">FrameworkJS.Controller</a></b> or an object that extends the <b><a href="#frameworkjscontroller">FrameworkJS.Controller</a></b> object.
                 </p>
                 <p>
-                    <b>getDOMElement</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.getDOMElement()<br/>
+                    <b>getDOMElement</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.getDOMElement()</code><br/>
                     Returns the view's DOM Element.
                 </p>
                 <p>
-                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.initialize()<br/>
+                    <b>initialize</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.initialize()</code><br/>
                     Initializes the view
                 </p>
+
+
+
+                <h2><a name="frameworkjsviewsextending"></a>Extending a view</h2>
+                <script src="https://gist.github.com/1941323.js?file=FrameworkJS.extend.extending.a.view.js"></script>
+                <h2><a name="frameworkjsviewsinstantiating"></a>Instantiating a view</h2>
+                <script src="https://gist.github.com/1941363.js?file=frameworkjs.retrieve.get.an.instance.of.a.view.js"></script>
+                <h2><a name="frameworkjsviewsretrieving"></a>Get an instance of a view</h2>
+                <script src="https://gist.github.com/1941363.js?file=frameworkjs.retrieve.get.an.already.instantiated.view.js"></script>
+
+
+
+                <h1><a name="frameworkjsmodel"></a>FrameworkJS.Model</h1>
+                <p>A model is responsible for storing data.</p>
+                <h2>Private properites</h2>
+                <p>
+                    <b>_data</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object that holds the data.
+                </p>
+                <h2>Public properties</h2>
+                <p>
+                    <b>name</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The name of the model.
+                </p>
+                <p>
+                    <b>id</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The id of the model.
+                </p>
+                <h2>Public methods</h2>
+                <p>
+                    <b>set</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.set(properties, silent)</code><br/>
+                    Setting the model's data. The <b>properties</b> parameter is an <b>Object</b> with keys/values. The <b>silent</b> parameter is a <b>Boolean</b> and if it is true then no change event is dispatched when a property of the model changes.
+                </p>
+                <p>
+                    <b>get</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>object.get(key)</code><br/>
+                    Returns a property value of the model. The <b>key</b> parameter is a <b>String</b>.
+                </p>
+
+                <h2><a name="frameworkjsmodelextending"></a>Extending a model</h2>
+                <script src="https://gist.github.com/1941652.js?file=Frameworkjs.extend.extending.a.model.js"></script>
+                <h2><a name="frameworkjsmodelinstantiating"></a>Instantiating a model</h2>
+                <script src="https://gist.github.com/1941670.js?file=frameworkjs.retrieve.instantiate.a.model.js"></script>
+                <h2><a name="frameworkjsmodelretrieving"></a>Get an instance of a model</h2>
+                <script src="https://gist.github.com/1941698.js?file=frameworkjs.retrieve.get.an.already.instantiated.model.js"></script>
+
+
             </div>
         </div>
     </section>
