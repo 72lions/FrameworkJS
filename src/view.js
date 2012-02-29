@@ -48,7 +48,7 @@ FrameworkJS.View = function() {
      * @type Object
      * @default null
      */
-    this.domElement = null;
+    this._domElement = null;
 
     /**
      * Function for when showing the view
@@ -106,7 +106,7 @@ FrameworkJS.View = function() {
      * @author Thodoris Tsiridis
      */
     this.getDOMElement = function() {
-        return this.domElement;
+        return this._domElement;
     };
 
     /**

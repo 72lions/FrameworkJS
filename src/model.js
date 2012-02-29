@@ -17,7 +17,7 @@ FrameworkJS.Model = function(){
      * @type String
      * @default {}
      */
-    this.data = {};
+    this._data = {};
 
     /**
      * The view name
@@ -52,9 +52,9 @@ FrameworkJS.Model = function(){
 
             changed = false;
 
-            if (typeof this.data[key] !== 'undefined') {
+            if (typeof this._data[key] !== 'undefined') {
 
-                if (this.data[key] !== properties[key]) {
+                if (this._data[key] !== properties[key]) {
                     changed = true;
                 }
 
@@ -62,7 +62,7 @@ FrameworkJS.Model = function(){
                 changed = true;
             }
 
-            this.data[key] = properties[key];
+            this._data[key] = properties[key];
 
             if (changed) {
                 if( typeof changedProperties === 'undefined') {
@@ -91,7 +91,7 @@ FrameworkJS.Model = function(){
      * @author Thodoris Tsiridis
      */
     this.get = function(key) {
-        return this.data[key];
+        return this._data[key];
     };
 
 };
