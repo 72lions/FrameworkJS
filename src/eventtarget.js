@@ -28,12 +28,25 @@ FrameworkJS.EventTarget = function () {
      */
     this.bind = function ( type, listener, ctx ) {
         var obj = {callback: listener, context: ctx};
+        var exists = false;
+        var events;
 
         if ( listeners[ type ] === undefined ) {
             listeners[ type ] = [];
         }
 
-        if ( listeners[ type ].indexOf(obj) === - 1 ) {
+        events = listeners[ type ];
+
+        for (var i = 0; i < events.length; i++) {
+
+            if (events[i].callback === listener && events[i].context === ctx) {
+                exists = true;
+                break;
+            }
+
+        }
+
+        if ( exists === false ) {
             listeners[ type ].push(obj);
         }
 
