@@ -1,6 +1,10 @@
 # FrameworkJS
 Another MVC framework for Javascript. FrameworkJS has built in support for Models, Views, Controllers and Services. It supports a strip-down Publisher/Subscriber pattern and it also has a utility for doing AJAX calls.
 
+## Documentation
+You can find the documentation here: http://72lions.github.com/FrameworkJS  
+Keep in mind that the documentation is not finished yet.
+
 ## Examples
 
 **Extending the base classes**
