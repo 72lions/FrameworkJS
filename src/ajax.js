@@ -85,6 +85,15 @@ FrameworkJS.Ajax = function(settings) {
     _settings.error = settings.error || undefined;
 
     /**
+     * The the object that is going to be used as the context
+     *
+     * @private
+     * @type Function
+     * @default undefined
+     */
+    _settings.context = settings.context || undefined;
+
+    /**
      * Executes an ajax call
      * @author Thodoris Tsiridis
      */
@@ -186,14 +195,22 @@ FrameworkJS.Ajax = function(settings) {
                             result = xmlhttp.responseText;
                         }
 
-                        _settings.success(result, xmlhttp);
+                        if (_settings.context !== undefined){
+                            _settings.success.call(_settings.context, result, xmlhttp);
+                        } else {
+                            _settings.success(result, xmlhttp);
+                        }
 
                     }
 
                 } else if (xmlhttp.status == 404) {
 
                     if (typeof _settings.error !== 'undefined') {
-                        _settings.error(xmlhttp);
+                        if (_settings.context !== undefined){
+                            _settings.error.call(_settings.context, xmlhttp);
+                        } else {
+                            _settings.error(xmlhttp);
+                        }
                     }
 
                 }
